@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IfChess</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        function abrirMenu() {
+            document.getElementById("MenuPecas").classList.toggle("ativo");
+        }
+                const pecas = {
+
+                rei: {
+                    nome: "Rei",
+                    imagem: "img/reis.png",
+                    funcao: "O rei é a peça mais importante do xadrez. O objetivo da partida é proteger seu rei e colocar o rei adversário em xeque-mate.",
+                    movimento: "Move-se apenas uma casa por vez, em qualquer direção.",
+                    curiosidade: "O rei pode realizar um movimento especial chamado roque, junto com uma torre."
+                },
+
+                dama: {
+                    nome: "Dama",
+                    imagem: "img/rainha.png",
+                    funcao: "A dama é a peça mais poderosa do xadrez, pois possui grande liberdade de movimentação.",
+                    movimento: "Move-se quantas casas quiser na horizontal, vertical ou diagonal.",
+                    curiosidade: "A dama combina os movimentos da torre e do bispo."
+                },
+
+                torre: {
+                    nome: "Torre",
+                    imagem: "img/torre.png",
+                    funcao: "A torre é uma peça importante para controlar linhas e colunas do tabuleiro.",
+                    movimento: "Move-se quantas casas quiser na horizontal ou vertical.",
+                    curiosidade: "A torre participa do movimento especial chamado roque."
+                },
+
+                bispo: {
+                    nome: "Bispo",
+                    imagem: "img/bispo.png",
+                    funcao: "O bispo é responsável por controlar as diagonais do tabuleiro.",
+                    movimento: "Move-se quantas casas quiser na diagonal.",
+                    curiosidade: "Cada bispo permanece durante toda a partida nas casas da mesma cor em que começou."
+                },
+
+                cavalo: {
+                    nome: "Cavalo",
+                    imagem: "img/cavalo.png",
+                    funcao: "O cavalo é uma peça que consegue surpreender o adversário com movimentos diferentes.",
+                    movimento: "Move-se em formato de L: duas casas em uma direção e uma casa perpendicularmente.",
+                    curiosidade: "É a única peça que pode saltar sobre outras peças."
+                },
+
+                peao: {
+                    nome: "Peão",
+                    imagem: "img/peao.png",
+                    funcao: "Os peões são as peças que formam a primeira linha de defesa e podem avançar pelo tabuleiro.",
+                    movimento: "Avança uma casa para frente, ou duas casas no primeiro movimento. Captura na diagonal.",
+                    curiosidade: "Ao chegar à última fileira, pode ser promovido a dama, torre, bispo ou cavalo."
+                }
+
+            };
+
+
+            // ABRIR JANELA
+
+            function mostrarPeca(nome) {
+
+                const peca = pecas[nome];
+
+                document.getElementById("nomePeca").textContent = peca.nome;
+
+                document.getElementById("imagemModal").src = peca.imagem;
+
+                document.getElementById("imagemModal").alt = peca.nome;
+
+                document.getElementById("funcaoPeca").textContent = peca.funcao;
+
+                document.getElementById("movimentoPeca").textContent = peca.movimento;
+
+                document.getElementById("curiosidadePeca").textContent = peca.curiosidade;
+
+                document.getElementById("modalPeca").classList.add("ativo");
+
+            }
+
+
+            // FECHAR JANELA
+
+            function fecharPeca() {
+
+                document.getElementById("modalPeca").classList.remove("ativo");
+
+            }
+
+
+            // FECHAR AO CLICAR FORA DA JANELA
+
+            document.getElementById("modalPeca").addEventListener("click", function(event) {
+
+                if (event.target === this) {
+                    fecharPeca();
+                }
+
+            });
+
+
+            // FECHAR COM ESC
+
+            document.addEventListener("keydown", function(event) {
+
+                if (event.key === "Escape") {
+                    fecharPeca();
+                }
+
+            });
+    </script>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">
+            <img src="img/logo.png" alt="">
+        </div>
+        <div class="menu">
+            <div class="opcoes">
+                <div class="logos">
+                    <img src="" alt="">
+                    <button>Inicio</button>
+                </div>
+                <div class="peca_logo">
+                    <img src="" alt="">
+                    <button class="dropdown-btn" onclick="abrirMenu()">Peças <span>▼</span></button>
+                    <div class="dropdown-content" id="MenuPecas">
+                        <div class="rei" onclick="mostrarPeca('rei')">
+                            <img src="img/reis.png" alt="">
+                            <h1>Rei</h1>
+                        </div>
+                        <div class="rei" onclick="mostrarPeca('dama')">
+                            <img src="img/rainha.png" alt="">
+                            <h1>Dama</h1>
+                        </div>
+                        <div class="rei" onclick="mostrarPeca('torre')">
+                            <img src="img/torre.png" alt="">
+                            <h1>Torre</h1>
+                        </div>
+                        <div class="rei" onclick="mostrarPeca('bispo')">
+                            <img src="img/bispo.png" alt="">
+                            <h1>Bispo</h1>
+                        </div>
+                        <div class="rei" onclick="mostrarPeca('cavalo')">
+                            <img src="img/cavalo.png" alt="">
+                            <h1>Cavalo</h1>
+                        </div>
+                        <div class="rei" onclick="mostrarPeca('peao')">
+                            <img src="img/peao.png" alt="">
+                            <h1>Peão</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="logos">
+                    <img src="" alt="">
+                    <button>Aberturas</button>
+                </div>
+                <div class="logos">
+                    <img src="" alt="">
+                    <button</button>
+                </div>
+                <div class="logos">
+                    <img src="" alt="">
+                    <button>Contato<button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="centro">
+        <img src="img/fundochess.png" alt="">
+        <div class="if_chess">
+            <h1>Aprenda <span class="verde">Xadrez</span><br>de uma forma fácil e divertida!<br></h1>
+            <p>Descubra sobre o xadrez,conheca cada peca,<br>
+            explore as abertura e evolua constante</p>
+            <a href="" class="btn"><button>Comecar Agora →</button></a>
+        </div>
+    </div>
+    <div class="interativo">
+        <div class="pecas">
+            <div class="peca">
+                <img src="img/peao.png" alt="">
+                <div>
+                    <h2>Conheça as <span class="verde">Peças</span></h2>
+                    <p>Veja o movimento e a função<br>de cada peça no tabuleiro</p>
+                    <button class="exp_pecas">Explorar Peças →</button>
+                </div>
+            </div>
+            <div class="aberturas">
+                <div class="abertura">
+                    <img src="img/tabuleiro.png" alt="">
+                    <div>
+                        <h2>Aberturas de <span class="verde">Xadrez</span></h2>
+                        <p>Conheça as principais aberturas<br>e comece a suas partidas!</p>
+                        <button class="v_aberturas">Ver Aberturas →</button>
+                    </div>
+                </div>
+            </div>
+            <div class="chessIF">
+                <div class="chess">
+                    <img src="img/info.png" alt="">
+                    <div>
+                        <h2>Sobre <span class="verde">ChessIF</span></h2>
+                        <p>Saiba mais sobre o nosso site,<br>nossa missão e o universo de xadrez</p>
+                        <button class="saiba">Saiba Mais →</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="frase">
+        <img src="" alt="">
+        <div class="alinhamentoC">
+            <h4>"O xadrez é mais que um jogo,é um exercício para a mente"</h4>
+            <p>-Garry Kasparov</p>
+        </div>
+    </div>
+    <div class="rodape">
+        <div class="logo_rodape">
+            <img src="img/if.png" alt="" class="img_rodape">
+            <div class="redes">
+                <div class="insta">
+                    <a href=""><img src="img/insta.png" alt=""></a>
+                </div>
+                <div class="face">
+                    <a href=""><img src="img/face.png" alt=""></a>
+                </div>
+                <div class="zap">
+                    <a href=""><img src="img/zap.png" alt=""></a>
+                </div>
+            </div>
+        </div>
+        <div class="links">
+            <h2 class="verde">Links Rápidos</h2>
+            <div class="link_1">
+                <div id="i">
+                    <a href="">Início</a>
+                </div>
+                <div id="p">
+                    <a href="">Peças</a>
+                </div>
+            </div>
+            <div class="link2">
+                <div id="a">
+                    <a href="">Aberturas</a>
+                </div>
+                <div id="s">
+                    <a href="">Sobre</a>
+                </div>
+            </div>
+        </div>
+        <div class="atendimento">
+            <h2 class="verde">Atendimento</h2>
+            <div class="email">
+                <img src="img/email.png" alt="">
+                <p>dg.cataguases@ifsudestemg.edu.br</p>
+            </div>
+            <div class="tele">
+                <img src="img/tele.png" alt="">
+                <p>(32) 98469-7529</p>
+            </div>
+            <div class="loc">
+                <img src="img/loc.png" alt="">
+                <p>Rua Romualdo Menezes,701,Menezes</p>
+            </div>
+        </div>
+    </div>
+    <div class="termos">
+        <div class="t">
+            <p>2026 ChessIF.Instituto Federal Sudeste de Minas Gerais Campus Cataguases.Todos os direitos reservados.</p>
+        </div>
+        <div class="Ed">
+            <p>Educação pública,gratuita e de qualidade</p>
+        </div>
+    </div>
+    
+
+            <div class="modal-overlay" id="modalPeca">
+
+            <div class="modal-peca">
+
+                <button class="fechar-modal" onclick="fecharPeca()">
+                    &times;
+                </button>
+
+                <div class="imagem-peca">
+                    <img id="imagemModal" src="" alt="">
+                </div>
+
+                <div class="informacoes-peca">
+
+                    <h2 id="nomePeca"></h2>
+
+                    <p id="funcaoPeca"></p>
+
+                    <h3>Movimentação</h3>
+                    <p id="movimentoPeca"></p>
+
+                    <h3>Curiosidade</h3>
+                    <p id="curiosidadePeca"></p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+</body>
+</html>
