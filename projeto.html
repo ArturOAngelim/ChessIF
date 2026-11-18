@@ -11,6 +11,12 @@
     <link rel="stylesheet" href="projeto.css">
 
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+    html {
+        visibility: hidden;
+    }
+    </style>
 </head>
 
 <body>
@@ -456,6 +462,50 @@
         });
 
     </script>
+
+<script type="module">
+
+    import { supabase } from "./supabase.js";
+
+    // VERIFICAÇÃO DA SESSÃO
+
+    async function verificarAcesso() {
+
+        const { data, error } = await supabase.auth.getSession();
+
+        if (error || !data.session) {
+
+            window.location.replace("login.html");
+            return;
+
+        }
+
+        // USUÁRIO AUTENTICADO
+
+        const usuario = data.session.user;
+
+        // IDENTIFICAÇÃO DO ADMINISTRADOR
+
+        const isAdmin = usuario.app_metadata?.role === "admin";
+
+        // DISPONIBILIZAR INFORMAÇÕES DO USUÁRIO
+
+        window.chessifUser = usuario;
+        window.chessifIsAdmin = isAdmin;
+
+        console.log("Usuário autenticado:", usuario.email);
+        console.log("Administrador:", isAdmin);
+
+        // LIBERAR A PÁGINA APÓS A VERIFICAÇÃO
+
+        document.documentElement.style.visibility = "visible";
+
+    }
+
+    verificarAcesso();
+
+</script>
+
 
 </body>
 </html>
