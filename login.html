@@ -38,15 +38,16 @@
             <h2>Bem-vindo de volta!</h2>
             <p class="subtitulo">Entre na sua conta para continuar.</p>
 
-            <form action="#" method="post">
+            <form id="form-login">
 
                 <div class="campo">
-                    <label for="usuario">Usuário ou e-mail</label>
+                    <label for="usuario">E-mail</label>
                     <input
-                        type="text"
+                        type="email"
                         id="usuario"
                         name="usuario"
-                        placeholder="Digite seu usuário"
+                        placeholder="Digite seu e-mail"
+                        autocomplete="email"
                         required
                     >
                 </div>
@@ -58,6 +59,7 @@
                         id="senha"
                         name="senha"
                         placeholder="Digite sua senha"
+                        autocomplete="current-password"
                         required
                     >
                 </div>
@@ -68,18 +70,20 @@
                         Lembrar de mim
                     </label>
 
-                    <a href="https://arturoangelim.github.io/ChessIF/recuperar.html">Esqueceu a senha?</a>
+                    <a href="recuperar.html">Esqueceu a senha?</a>
                 </div>
 
-                <a href="https://arturoangelim.github.io/ChessIF/projeto"><button type="submit" class="entrar">
+                <p id="mensagem-login" class="mensagem" role="status"></p>
+
+                <button type="submit" class="entrar" id="btn-entrar">
                     Entrar na conta
-                </button></a>
+                </button>
 
             </form>
 
             <div class="cadastro">
                 <p>Não possui uma conta?</p>
-                <a href="https://arturoangelim.github.io/ChessIF/cadastro.html">Criar conta</a>
+                <a href="cadastro.html">Criar conta</a>
             </div>
 
         </div>
@@ -89,6 +93,66 @@
     <footer>
         <p>ChessIF · Desenvolvido para amantes do xadrez</p>
     </footer>
+
+    <script type="module">
+
+        import { supabase } from "./supabase.js";
+
+        const formulario = document.getElementById("form-login");
+        const campoEmail = document.getElementById("usuario");
+        const campoSenha = document.getElementById("senha");
+        const mensagem = document.getElementById("mensagem-login");
+        const botao = document.getElementById("btn-entrar");
+
+        formulario.addEventListener("submit", async (event) => {
+
+            event.preventDefault();
+
+            mensagem.textContent = "";
+            mensagem.className = "mensagem";
+
+            const email = campoEmail.value.trim();
+            const senha = campoSenha.value;
+
+            botao.disabled = true;
+            botao.textContent = "Entrando...";
+
+            try {
+
+                const { data, error } = await supabase.auth.signInWithPassword({
+                    email: email,
+                    password: senha
+                });
+
+                if (error) {
+                    throw error;
+                }
+
+                if (!data.user) {
+                    throw new Error("Não foi possível identificar sua conta.");
+                }
+
+                mensagem.textContent = "Login realizado com sucesso!";
+                mensagem.classList.add("sucesso");
+
+                window.location.href = "projeto.html";
+
+            } catch (error) {
+
+                console.error("Erro no login:", error);
+
+                mensagem.textContent =
+                    "E-mail ou senha incorretos. Verifique seus dados e tente novamente.";
+
+                mensagem.classList.add("erro");
+
+                botao.disabled = false;
+                botao.textContent = "Entrar na conta";
+            }
+
+        });
+
+    </script>
 
 </body>
 </html>
