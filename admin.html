@@ -1,0 +1,205 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ChessIF | Administração</title>
+
+    <link rel="stylesheet" href="admin.css">
+
+    <!-- Evita exibir o painel antes da verificação -->
+    <style>
+        body {
+            visibility: hidden;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header-admin">
+
+        <div class="logo">
+            <h1>ChessIF</h1>
+            <span>ADMINISTRAÇÃO</span>
+        </div>
+
+        <nav>
+            <a href="projeto.html">Voltar ao site</a>
+            <button id="btn-sair" type="button">Sair</button>
+        </nav>
+
+    </header>
+
+    <main class="painel">
+
+        <section class="boas-vindas">
+
+            <div>
+                <p class="subtitulo">PAINEL ADMINISTRATIVO</p>
+                <h2>Bem-vindo ao ChessIF</h2>
+                <p>Gerencie as informações do seu projeto.</p>
+            </div>
+
+            <div class="administrador">
+                <span class="icone-admin">♔</span>
+
+                <div>
+                    <p>Administrador conectado</p>
+                    <strong id="admin-email">Verificando...</strong>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="gerenciamento">
+
+            <h2>Gerenciamento</h2>
+
+            <div class="cards">
+
+                <article class="card">
+
+                    <div class="icone">📋</div>
+
+                    <h3>Inscrições</h3>
+
+                    <p>
+                        Visualizar, analisar e gerenciar
+                        solicitações de participação.
+                    </p>
+
+                    <span class="status">Em desenvolvimento</span>
+
+                </article>
+
+                <article class="card">
+
+                    <div class="icone">♟</div>
+
+                    <h3>Participantes</h3>
+
+                    <p>
+                        Gerenciar os integrantes,
+                        suas turmas e informações.
+                    </p>
+
+                    <span class="status">Em desenvolvimento</span>
+
+                </article>
+
+                <article class="card">
+
+                    <div class="icone">📸</div>
+
+                    <h3>Eventos e fotos</h3>
+
+                    <p>
+                        Organizar eventos, imagens
+                        e registros do ChessIF.
+                    </p>
+
+                    <span class="status">Em desenvolvimento</span>
+
+                </article>
+
+            </div>
+
+        </section>
+
+        <section class="informacoes">
+
+            <h2>Informações do sistema</h2>
+
+            <div class="info-box">
+                <p>Projeto</p>
+                <strong>ChessIF</strong>
+            </div>
+
+            <div class="info-box">
+                <p>Seu nível de acesso</p>
+                <strong>Administrador</strong>
+            </div>
+
+            <div class="info-box">
+                <p>Autenticação</p>
+                <strong>Supabase</strong>
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>ChessIF &copy; 2026 — Painel administrativo</p>
+    </footer>
+
+    <!-- VERIFICAÇÃO DE ACESSO -->
+    <script type="module">
+
+        import { supabase } from "./supabase.js";
+
+        async function verificarAdmin() {
+
+            try {
+
+                const { data, error } = await supabase.auth.getSession();
+
+                if (error || !data.session) {
+                    window.location.replace("login.html");
+                    return;
+                }
+
+                const usuario = data.session.user;
+
+                const isAdmin =
+                    usuario.app_metadata?.role === "admin";
+
+                // Se não for administrador
+                if (!isAdmin) {
+
+                    alert("Acesso restrito. Somente administradores.");
+
+                    window.location.replace("projeto.html");
+                    return;
+                }
+
+                // Exibe email do administrador
+                document.getElementById("admin-email").textContent =
+                    usuario.email;
+
+                // Libera a página
+                document.body.style.visibility = "visible";
+
+            } catch (erro) {
+
+                console.error("Erro ao verificar administrador:", erro);
+
+                window.location.replace("login.html");
+            }
+
+        }
+
+        // BOTÃO DE SAIR
+        document.getElementById("btn-sair").addEventListener("click", async () => {
+
+            const { error } = await supabase.auth.signOut();
+
+            if (error) {
+                alert("Não foi possível sair da conta.");
+                console.error(error);
+                return;
+            }
+
+            window.location.replace("login.html");
+
+        });
+
+        verificarAdmin();
+
+    </script>
+
+</body>
+</html>
