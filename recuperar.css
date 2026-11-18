@@ -1,9 +1,12 @@
-
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: Arial, Helvetica, sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
@@ -14,14 +17,18 @@ body {
     flex-direction: column;
 }
 
-/* CABEÇALHO */
+[hidden] {
+    display: none !important;
+}
 
+/* CABEÇALHO */
 .header {
-    height: 85px;
+    min-height: 85px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 8%;
+    gap: 16px;
+    padding: 12px 8%;
     border-bottom: 1px solid #26342a;
 }
 
@@ -29,6 +36,8 @@ body {
     display: flex;
     align-items: center;
     gap: 12px;
+    color: white;
+    text-decoration: none;
 }
 
 .logo h2 {
@@ -48,14 +57,14 @@ body {
     text-decoration: none;
     color: #c3c9c4;
     font-size: 14px;
+    transition: color 0.3s ease;
 }
 
 .voltar:hover {
     color: #45b86b;
 }
 
-/* PRINCIPAL */
-
+/* ÁREA PRINCIPAL */
 .principal {
     flex: 1;
     display: flex;
@@ -65,7 +74,6 @@ body {
 }
 
 /* CARD */
-
 .recuperacao {
     width: 450px;
     max-width: 100%;
@@ -74,10 +82,16 @@ body {
     border: 1px solid #2c3a30;
     border-radius: 18px;
     text-align: center;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+    animation: aparecer 0.5s ease both;
+}
+
+@keyframes aparecer {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 /* ÍCONE */
-
 .icone {
     width: 75px;
     height: 75px;
@@ -93,7 +107,6 @@ body {
 }
 
 /* TEXTOS */
-
 .recuperacao h1 {
     font-size: 28px;
     margin-bottom: 15px;
@@ -106,14 +119,13 @@ body {
     margin-bottom: 30px;
 }
 
-/* FORM */
-
+/* FORMULÁRIO */
 .campo {
     display: flex;
     flex-direction: column;
     gap: 10px;
     text-align: left;
-    margin-bottom: 25px;
+    margin-bottom: 18px;
 }
 
 .campo label {
@@ -130,7 +142,7 @@ body {
     border-radius: 8px;
     outline: none;
     color: white;
-    transition: 0.3s;
+    transition: border-color 0.3s, box-shadow 0.3s;
 }
 
 .campo input:focus {
@@ -142,11 +154,34 @@ body {
     color: #657268;
 }
 
-/* BOTÃO */
+/* MENSAGENS */
+.mensagem {
+    min-height: 0;
+    margin: 0 0 14px;
+    font-size: 13px;
+    line-height: 1.6;
+}
 
+.mensagem:empty {
+    display: none;
+}
+
+.mensagem.sucesso {
+    color: #69d58a;
+}
+
+.mensagem.erro {
+    color: #ff8585;
+}
+
+.mensagem.info {
+    color: #b7c7bb;
+}
+
+/* BOTÃO */
 .btn_enviar {
     width: 100%;
-    height: 52px;
+    min-height: 52px;
     background: #329653;
     border: none;
     border-radius: 8px;
@@ -154,22 +189,27 @@ body {
     font-weight: bold;
     font-size: 15px;
     cursor: pointer;
-    transition: 0.3s;
+    transition: background 0.3s, transform 0.3s, opacity 0.3s;
 }
 
-.btn_enviar:hover {
+.btn_enviar:hover:not(:disabled) {
     background: #40b566;
     transform: translateY(-2px);
 }
 
-/* VOLTAR */
+.btn_enviar:disabled {
+    opacity: 0.65;
+    cursor: wait;
+}
 
+/* VOLTAR */
 .voltar_login {
     display: inline-block;
     margin-top: 25px;
     color: #45b86b;
     text-decoration: none;
     font-size: 14px;
+    transition: color 0.3s;
 }
 
 .voltar_login:hover {
@@ -177,10 +217,10 @@ body {
 }
 
 /* RODAPÉ */
-
 .rodape {
     display: flex;
     justify-content: space-between;
+    gap: 15px;
     padding: 20px 8%;
     border-top: 1px solid #26342a;
     color: #657268;
@@ -188,12 +228,10 @@ body {
 }
 
 /* RESPONSIVIDADE */
-
 @media (max-width: 500px) {
-
     .header {
-        height: 75px;
-        padding: 0 20px;
+        min-height: 75px;
+        padding: 12px 20px;
     }
 
     .logo h2 {
@@ -222,5 +260,11 @@ body {
         text-align: center;
         gap: 10px;
     }
+}
 
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
 }

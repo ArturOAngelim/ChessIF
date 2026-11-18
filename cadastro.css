@@ -317,3 +317,25 @@ body {
     }
 
 }
+
+
+
+.mensagem-cadastro {
+    margin: 12px 0;
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: center;
+}
+
+.mensagem-cadastro.erro {
+    color: #ef7777;
+}
+
+.mensagem-cadastro.sucesso {
+    color: #4acb73;
+}
+
+.btn_cadastrar:disabled {
+    opacity: 0.6;
+    cursor: wait;
+}

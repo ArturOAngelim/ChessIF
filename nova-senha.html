@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0d120e">
+    <title>ChessIF | Criar nova senha</title>
+    <link rel="stylesheet" href="nova-senha.css">
+</head>
+<body>
+
+    <header class="header">
+        <a href="index.html" class="logo" aria-label="ChessIF - página inicial">
+            <span class="peca" aria-hidden="true">♛</span>
+            <h2>CHESS<span>IF</span></h2>
+        </a>
+        <a href="login.html" class="voltar">Voltar ao login</a>
+    </header>
+
+    <main class="principal">
+        <section class="card-senha" aria-labelledby="titulo-senha">
+            <div class="icone" aria-hidden="true">♙</div>
+
+            <h1 id="titulo-senha">Crie uma nova senha</h1>
+
+            <p class="descricao">
+                Escolha uma senha nova para acessar sua conta ChessIF.
+            </p>
+
+            <p id="estado-link" class="mensagem info" role="status" aria-live="polite">
+                Verificando o link de recuperação...
+            </p>
+
+            <form id="form-nova-senha" hidden novalidate>
+                <div class="campo">
+                    <label for="senha">Nova senha</label>
+                    <input
+                        type="password"
+                        id="senha"
+                        name="senha"
+                        placeholder="Digite sua nova senha"
+                        minlength="8"
+                        maxlength="72"
+                        autocomplete="new-password"
+                        required
+                    >
+                </div>
+
+                <div class="campo">
+                    <label for="confirmar-senha">Confirme a nova senha</label>
+                    <input
+                        type="password"
+                        id="confirmar-senha"
+                        name="confirmar-senha"
+                        placeholder="Digite a senha novamente"
+                        minlength="8"
+                        maxlength="72"
+                        autocomplete="new-password"
+                        required
+                    >
+                </div>
+
+                <p id="mensagem" class="mensagem" role="status" aria-live="polite"></p>
+
+                <button type="submit" class="btn-enviar" id="btn-salvar">
+                    Salvar nova senha
+                </button>
+            </form>
+
+            <div id="resultado-sucesso" class="resultado-sucesso" hidden>
+                <p>Sua senha foi atualizada. Agora você pode entrar no ChessIF com a nova senha.</p>
+                <a href="login.html" class="btn-enviar link-login">Ir para o login</a>
+            </div>
+
+            <a href="recuperar.html" class="voltar_login">Solicitar outro link de recuperação</a>
+        </section>
+    </main>
+
+    <footer class="rodape">
+        <p>ChessIF © 2026</p>
+        <p>Desenvolvido para os amantes do xadrez.</p>
+    </footer>
+
+    <script type="module">
+        import { supabase } from "./supabase.js";
+
+        const formulario = document.getElementById("form-nova-senha");
+        const estadoLink = document.getElementById("estado-link");
+        const mensagem = document.getElementById("mensagem");
+        const botao = document.getElementById("btn-salvar");
+        const resultadoSucesso = document.getElementById("resultado-sucesso");
+
+        let sessaoDisponivel = false;
+
+        function mostrarEstado(texto, tipo = "info") {
+            estadoLink.textContent = texto;
+            estadoLink.className = `mensagem ${tipo}`;
+            estadoLink.hidden = false;
+        }
+
+        function habilitarFormulario() {
+            sessaoDisponivel = true;
+            estadoLink.hidden = true;
+            formulario.hidden = false;
+        }
+
+        // O Supabase emite PASSWORD_RECOVERY quando o link de recuperação
+        // é validado e a sessão de recuperação é estabelecida.
+        const { data: { subscription } } = supabase.auth.onAuthStateChange(
+            (event, session) => {
+                if (event === "PASSWORD_RECOVERY" && session) {
+                    habilitarFormulario();
+                }
+            }
+        );
+
+        // Também verifica a sessão já processada pelo cliente Supabase.
+        async function verificarSessao() {
+            const { data, error } = await supabase.auth.getSession();
+
+            if (error || !data.session) {
+                mostrarEstado(
+                    "Este link é inválido, expirou ou já foi utilizado. Solicite um novo link de recuperação.",
+                    "erro"
+                );
+                return;
+            }
+
+            habilitarFormulario();
+        }
+
+        await verificarSessao();
+
+        formulario.addEventListener("submit", async (event) => {
+            event.preventDefault();
+
+            if (!sessaoDisponivel) {
+                mostrarEstado(
+                    "Não há uma sessão válida de recuperação. Solicite um novo link.",
+                    "erro"
+                );
+                return;
+            }
+
+            const senha = document.getElementById("senha").value;
+            const confirmarSenha = document.getElementById("confirmar-senha").value;
+
+            mensagem.textContent = "";
+            mensagem.className = "mensagem";
+
+            if (senha.length < 8) {
+                mensagem.textContent = "A senha deve ter pelo menos 8 caracteres.";
+                mensagem.classList.add("erro");
+                return;
+            }
+
+            if (senha.length > 72) {
+                mensagem.textContent = "A senha ultrapassa o limite permitido.";
+                mensagem.classList.add("erro");
+                return;
+            }
+
+            if (senha !== confirmarSenha) {
+                mensagem.textContent = "As senhas não correspondem.";
+                mensagem.classList.add("erro");
+                return;
+            }
+
+            botao.disabled = true;
+            botao.textContent = "Atualizando...";
+
+            try {
+                const { error } = await supabase.auth.updateUser({
+                    password: senha
+                });
+
+                if (error) {
+                    mensagem.textContent =
+                        "Não foi possível atualizar a senha. O link pode ter expirado ou a senha pode não atender à política de segurança.";
+                    mensagem.classList.add("erro");
+                    return;
+                }
+
+                formulario.hidden = true;
+                resultadoSucesso.hidden = false;
+                estadoLink.hidden = true;
+
+                // Encerra as sessões para exigir novo login após a redefinição.
+                const { error: signOutError } = await supabase.auth.signOut({
+                    scope: "global"
+                });
+
+                if (signOutError) {
+                    // A troca da senha já foi concluída; não mostramos detalhes internos.
+                    console.warn("Não foi possível encerrar todas as sessões automaticamente.");
+                }
+
+            } catch {
+                mensagem.textContent =
+                    "Não foi possível conectar ao serviço. Tente novamente.";
+                mensagem.classList.add("erro");
+            } finally {
+                botao.disabled = false;
+                botao.textContent = "Salvar nova senha";
+            }
+        });
+
+        // Evita manter um listener ativo após sair desta página.
+        window.addEventListener("pagehide", () => {
+            subscription.unsubscribe();
+        });
+    </script>
+
+</body>
+</html>

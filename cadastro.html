@@ -61,8 +61,7 @@
 
                 </div>
 
-
-                <form action="#" method="post">
+                <form id="form-cadastro">
 
                     <div class="campo">
 
@@ -73,6 +72,8 @@
                             id="nome"
                             name="nome"
                             placeholder="Digite seu nome"
+                            minlength="2"
+                            maxlength="100"
                             required
                         >
 
@@ -90,8 +91,11 @@
                             placeholder="Escolha um usuário"
                             minlength="3"
                             maxlength="20"
+                            pattern="[a-zA-Z0-9_]+"
                             required
                         >
+
+                        <small>Use de 3 a 20 letras, números ou underline.</small>
 
                     </div>
 
@@ -105,6 +109,7 @@
                             id="email"
                             name="email"
                             placeholder="seuemail@exemplo.com"
+                            maxlength="254"
                             required
                         >
 
@@ -121,6 +126,7 @@
                             name="senha"
                             placeholder="Crie uma senha"
                             minlength="8"
+                            autocomplete="new-password"
                             required
                         >
 
@@ -137,6 +143,7 @@
                             name="confirmar_senha"
                             placeholder="Digite a senha novamente"
                             minlength="8"
+                            autocomplete="new-password"
                             required
                         >
 
@@ -145,7 +152,12 @@
 
                     <label class="termos">
 
-                        <input type="checkbox" name="termos" required>
+                        <input
+                            type="checkbox"
+                            id="termos"
+                            name="termos"
+                            required
+                        >
 
                         <span>
                             Concordo com os termos de uso e a política de privacidade.
@@ -154,11 +166,19 @@
                     </label>
 
 
-                    <a href="https://arturoangelim.github.io/ChessIF/login"></a><button type="submit" class="btn_cadastrar">
+                    <p
+                        id="mensagem-cadastro"
+                        class="mensagem-cadastro"
+                        aria-live="polite"
+                    ></p>
+
+
+                    <button type="submit" class="btn_cadastrar">
                         Criar minha conta
                     </button>
 
                 </form>
+
 
 
                 <div class="criar_conta">
@@ -183,6 +203,206 @@
         <p>Desenvolvido para os amantes do xadrez.</p>
 
     </footer>
+
+
+
+
+        <script type="module">
+
+            import { supabase } from "./supabase.js";
+
+
+            const formulario = document.getElementById("form-cadastro");
+
+            const mensagem = document.getElementById("mensagem-cadastro");
+
+            const botao = formulario.querySelector('button[type="submit"]');
+
+
+            formulario.addEventListener("submit", async function(event) {
+
+                event.preventDefault();
+
+
+                // =================================
+                // 1. CAPTURAR OS DADOS
+                // =================================
+
+                const nome = document
+                    .getElementById("nome")
+                    .value
+                    .trim();
+
+                const usuario = document
+                    .getElementById("usuario")
+                    .value
+                    .trim()
+                    .toLowerCase();
+
+                const email = document
+                    .getElementById("email")
+                    .value
+                    .trim()
+                    .toLowerCase();
+
+                const senha = document
+                    .getElementById("senha")
+                    .value;
+
+                const confirmarSenha = document
+                    .getElementById("confirmar_senha")
+                    .value;
+
+
+                // =================================
+                // 2. VALIDAR OS DADOS
+                // =================================
+
+                mensagem.textContent = "";
+                mensagem.className = "mensagem-cadastro";
+
+
+                if (nome.length < 2 || nome.length > 100) {
+
+                    mensagem.textContent = "Informe um nome válido.";
+
+                    mensagem.classList.add("erro");
+
+                    return;
+
+                }
+
+
+                if (!/^[a-z0-9_]{3,20}$/.test(usuario)) {
+
+                    mensagem.textContent =
+                        "O usuário deve ter de 3 a 20 caracteres: letras, números ou underline.";
+
+                    mensagem.classList.add("erro");
+
+                    return;
+
+                }
+
+
+                if (senha.length < 8) {
+
+                    mensagem.textContent =
+                        "A senha precisa ter pelo menos 8 caracteres.";
+
+                    mensagem.classList.add("erro");
+
+                    return;
+
+                }
+
+
+                if (senha !== confirmarSenha) {
+
+                    mensagem.textContent =
+                        "As senhas não correspondem.";
+
+                    mensagem.classList.add("erro");
+
+                    return;
+
+                }
+
+
+                // =================================
+                // 3. ENVIAR AO SUPABASE AUTH
+                // =================================
+
+                botao.disabled = true;
+
+                botao.textContent = "Criando conta...";
+
+
+                try {
+
+                    const { data, error } = await supabase.auth.signUp({
+
+                        email: email,
+
+                        password: senha,
+
+                        options: {
+
+                            data: {
+
+                                full_name: nome,
+
+                                username: usuario
+
+                            },
+
+                            emailRedirectTo:
+                                "https://arturoangelim.github.io/ChessIF/login.html"
+
+                        }
+
+                    });
+
+
+                    if (error) {
+
+                        console.error("Erro no cadastro:", error);
+
+                        mensagem.textContent =
+                            "Não foi possível concluir o cadastro. Verifique os dados ou tente novamente.";
+
+                        mensagem.classList.add("erro");
+
+                        return;
+
+                    }
+
+
+                    // =================================
+                    // 4. RETORNO DO CADASTRO
+                    // =================================
+
+                    if (data.session) {
+
+                        mensagem.textContent =
+                            "Conta criada! Você já pode fazer login.";
+
+                    } else {
+
+                        mensagem.textContent =
+                            "Conta criada! Verifique seu e-mail e confirme o cadastro antes de entrar.";
+
+                    }
+
+                    mensagem.classList.add("sucesso");
+
+                    formulario.reset();
+
+
+                } catch (erro) {
+
+                    console.error("Falha na comunicação:", erro);
+
+                    mensagem.textContent =
+                        "Não foi possível conectar ao servidor. Tente novamente.";
+
+                    mensagem.classList.add("erro");
+
+
+                } finally {
+
+                    botao.disabled = false;
+
+                    botao.textContent = "Criar minha conta";
+
+                }
+
+            });
+
+        </script>
+
+
+
 
 </body>
 </html>

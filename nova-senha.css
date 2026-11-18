@@ -1,0 +1,279 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #0d120e;
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+/* CABEÇALHO */
+.header {
+    min-height: 85px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 12px 8%;
+    border-bottom: 1px solid #26342a;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: white;
+    text-decoration: none;
+}
+
+.logo h2 {
+    font-size: 22px;
+}
+
+.logo h2 span {
+    color: #45b86b;
+}
+
+.peca {
+    color: #45b86b;
+    font-size: 35px;
+}
+
+.voltar {
+    text-decoration: none;
+    color: #c3c9c4;
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+.voltar:hover {
+    color: #45b86b;
+}
+
+/* ÁREA PRINCIPAL */
+.principal {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+/* CARTÃO */
+.card-senha {
+    width: 450px;
+    max-width: 100%;
+    padding: 45px 40px;
+    background: #151d17;
+    border: 1px solid #2c3a30;
+    border-radius: 18px;
+    text-align: center;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+    animation: aparecer 0.5s ease both;
+}
+
+@keyframes aparecer {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ÍCONE */
+.icone {
+    width: 75px;
+    height: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 25px;
+    border: 1px solid #34533b;
+    border-radius: 50%;
+    background: #1d3022;
+    color: #45b86b;
+    font-size: 35px;
+}
+
+.card-senha h1 {
+    font-size: 28px;
+    margin-bottom: 15px;
+}
+
+.descricao {
+    color: #aab5ac;
+    font-size: 14px;
+    line-height: 1.8;
+    margin-bottom: 25px;
+}
+
+/* CAMPOS */
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.campo label {
+    color: #e0e6e1;
+    font-size: 14px;
+}
+
+.campo input {
+    width: 100%;
+    height: 52px;
+    padding: 0 15px;
+    background: #0d120e;
+    border: 1px solid #2c3a30;
+    border-radius: 8px;
+    outline: none;
+    color: white;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.campo input:focus {
+    border-color: #45b86b;
+    box-shadow: 0 0 10px #45b86b15;
+}
+
+.campo input::placeholder {
+    color: #657268;
+}
+
+/* MENSAGENS */
+.mensagem {
+    margin: 0 0 15px;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.mensagem:empty {
+    display: none;
+}
+
+.mensagem.info {
+    color: #b7c7bb;
+}
+
+.mensagem.erro {
+    color: #ff8585;
+}
+
+/* BOTÃO */
+.btn-enviar {
+    display: block;
+    width: 100%;
+    min-height: 52px;
+    padding: 14px 18px;
+    background: #329653;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s, opacity 0.3s;
+}
+
+.btn-enviar:hover:not(:disabled) {
+    background: #40b566;
+    transform: translateY(-2px);
+}
+
+.btn-enviar:disabled {
+    opacity: 0.65;
+    cursor: wait;
+}
+
+.link-login {
+    margin-top: 15px;
+}
+
+.resultado-sucesso p {
+    color: #69d58a;
+    font-size: 14px;
+    line-height: 1.7;
+    margin: 15px 0;
+}
+
+/* VOLTAR */
+.voltar_login {
+    display: inline-block;
+    margin-top: 25px;
+    color: #45b86b;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s;
+}
+
+.voltar_login:hover {
+    color: #68d58b;
+}
+
+/* RODAPÉ */
+.rodape {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 20px 8%;
+    border-top: 1px solid #26342a;
+    color: #657268;
+    font-size: 12px;
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 500px) {
+    .header {
+        min-height: 75px;
+        padding: 12px 20px;
+    }
+
+    .logo h2 {
+        font-size: 18px;
+    }
+
+    .peca {
+        font-size: 28px;
+    }
+
+    .voltar {
+        font-size: 12px;
+    }
+
+    .card-senha {
+        padding: 35px 22px;
+    }
+
+    .card-senha h1 {
+        font-size: 24px;
+    }
+
+    .rodape {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 10px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}
