@@ -140,20 +140,22 @@ img {
     color: green;
 }
 
-.btn button {
+.btn {
+    display: inline-block;
     border: 1px solid green;
     background: green;
     border-radius: 20px;
     font-size: 20px;
     padding: 14px 18px;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family: 'Lucida Sans', sans-serif;
     position: relative;
     top: 50px;
-    transition: 1s ease;
+    transition: 0.3s ease;
     color: white;
+    text-decoration: none;
 }
 
-.btn button:hover {
+.btn:hover {
     transition: 1s ease;
     transform: scale(1.05);
     cursor: pointer;
