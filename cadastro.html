@@ -1,0 +1,188 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>IFChess | Cadastro</title>
+
+    <link rel="stylesheet" href="cadastro.css">
+</head>
+<body>
+
+    <div class="header">
+
+        <div class="logo">
+            <span class="peca">♛</span>
+            <h2>IF<span>CHESS</span></h2>
+        </div>
+
+        <a href="login.html" class="voltar">Voltar ao login</a>
+
+    </div>
+
+
+    <div class="principal">
+
+        <div class="apresentacao">
+
+            <p class="linha">FAÇA PARTE DO JOGO</p>
+
+            <h1>
+                Seu próximo
+                <span>desafio começa aqui.</span>
+            </h1>
+
+            <p class="descricao">
+                Crie sua conta e entre no universo do xadrez.
+                Aprenda, evolua e descubra novas possibilidades
+                a cada movimento.
+            </p>
+
+            <div class="decoracao">
+                ♞
+            </div>
+
+        </div>
+
+
+        <div class="area_cadastro">
+
+            <div class="formulario">
+
+                <div class="topo_form">
+
+                    <span class="icone">♟</span>
+
+                    <h2>Criar uma conta</h2>
+
+                    <p>Preencha seus dados para começar.</p>
+
+                </div>
+
+
+                <form action="#" method="post">
+
+                    <div class="campo">
+
+                        <label for="nome">Nome completo</label>
+
+                        <input
+                            type="text"
+                            id="nome"
+                            name="nome"
+                            placeholder="Digite seu nome"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="campo">
+
+                        <label for="usuario">Nome de usuário</label>
+
+                        <input
+                            type="text"
+                            id="usuario"
+                            name="usuario"
+                            placeholder="Escolha um usuário"
+                            minlength="3"
+                            maxlength="20"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="campo">
+
+                        <label for="email">E-mail</label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="seuemail@exemplo.com"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="campo">
+
+                        <label for="senha">Senha</label>
+
+                        <input
+                            type="password"
+                            id="senha"
+                            name="senha"
+                            placeholder="Crie uma senha"
+                            minlength="8"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="campo">
+
+                        <label for="confirmar_senha">Confirmar senha</label>
+
+                        <input
+                            type="password"
+                            id="confirmar_senha"
+                            name="confirmar_senha"
+                            placeholder="Digite a senha novamente"
+                            minlength="8"
+                            required
+                        >
+
+                    </div>
+
+
+                    <label class="termos">
+
+                        <input type="checkbox" name="termos" required>
+
+                        <span>
+                            Concordo com os termos de uso e a política de privacidade.
+                        </span>
+
+                    </label>
+
+
+                    <button type="submit" class="btn_cadastrar">
+                        Criar minha conta
+                    </button>
+
+                </form>
+
+
+                <div class="criar_conta">
+
+                    <p>Já possui uma conta?</p>
+
+                    <a href="login.html">Entrar</a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <footer class="rodape">
+
+        <p>IFChess © 2026</p>
+
+        <p>Desenvolvido para os amantes do xadrez.</p>
+
+    </footer>
+
+</body>
+</html>

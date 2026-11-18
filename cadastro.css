@@ -1,0 +1,319 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background: #0d120e;
+    color: white;
+    min-height: 100vh;
+}
+
+/* CABEÇALHO */
+
+.header {
+    height: 85px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 8%;
+    border-bottom: 1px solid #26342a;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo h2 {
+    font-size: 22px;
+}
+
+.logo h2 span {
+    color: #45b86b;
+}
+
+.peca {
+    color: #45b86b;
+    font-size: 35px;
+}
+
+.voltar {
+    color: #c3c9c4;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.voltar:hover {
+    color: #45b86b;
+}
+
+/* PRINCIPAL */
+
+.principal {
+    min-height: calc(100vh - 150px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 8%;
+    gap: 80px;
+}
+
+/* APRESENTAÇÃO */
+
+.apresentacao {
+    width: 45%;
+}
+
+.linha {
+    color: #45b86b;
+    letter-spacing: 3px;
+    font-size: 11px;
+    margin-bottom: 25px;
+}
+
+.apresentacao h1 {
+    font-size: clamp(40px, 5vw, 60px);
+    line-height: 1.15;
+}
+
+.apresentacao h1 span {
+    color: #45b86b;
+    display: block;
+}
+
+.descricao {
+    color: #aab5ac;
+    line-height: 1.8;
+    font-size: 15px;
+    margin-top: 25px;
+    max-width: 450px;
+}
+
+.decoracao {
+    font-size: 220px;
+    color: #45b86b;
+    opacity: 0.13;
+    text-align: center;
+}
+
+/* CADASTRO */
+
+.area_cadastro {
+    width: 55%;
+    display: flex;
+    justify-content: center;
+}
+
+.formulario {
+    width: 450px;
+    max-width: 100%;
+    padding: 15px;
+}
+
+.topo_form {
+    margin-bottom: 30px;
+}
+
+.icone {
+    font-size: 35px;
+    color: #45b86b;
+}
+
+.topo_form h2 {
+    font-size: 30px;
+    margin-top: 15px;
+}
+
+.topo_form p {
+    color: #89968b;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+/* CAMPOS */
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.campo label {
+    font-size: 14px;
+    color: #e0e6e1;
+}
+
+.campo input {
+    width: 100%;
+    height: 50px;
+    padding: 0 15px;
+    background: #151d17;
+    border: 1px solid #2c3a30;
+    border-radius: 8px;
+    color: white;
+    outline: none;
+    transition: 0.3s;
+}
+
+.campo input:focus {
+    border-color: #45b86b;
+    box-shadow: 0 0 10px #45b86b15;
+}
+
+.campo input::placeholder {
+    color: #657268;
+}
+
+/* TERMOS */
+
+.termos {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    color: #aab5ac;
+    font-size: 12px;
+    line-height: 1.6;
+    margin: 5px 0 25px;
+}
+
+.termos input {
+    margin-top: 3px;
+    accent-color: #45b86b;
+}
+
+/* BOTÃO */
+
+.btn_cadastrar {
+    width: 100%;
+    height: 52px;
+    background: #329653;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn_cadastrar:hover {
+    background: #40b566;
+    transform: translateY(-2px);
+}
+
+/* LOGIN */
+
+.criar_conta {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 25px;
+    font-size: 14px;
+}
+
+.criar_conta p {
+    color: #89968b;
+}
+
+.criar_conta a {
+    color: #45b86b;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* RODAPÉ */
+
+.rodape {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 8%;
+    border-top: 1px solid #26342a;
+    color: #657268;
+    font-size: 12px;
+}
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 900px) {
+
+    .principal {
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    .apresentacao,
+    .area_cadastro {
+        width: 100%;
+    }
+
+    .apresentacao {
+        text-align: center;
+    }
+
+    .descricao {
+        margin: 20px auto;
+    }
+
+    .decoracao {
+        display: none;
+    }
+
+    .apresentacao h1 {
+        font-size: 40px;
+    }
+
+}
+
+@media (max-width: 500px) {
+
+    .header {
+        padding: 0 20px;
+        height: 75px;
+    }
+
+    .logo h2 {
+        font-size: 18px;
+    }
+
+    .peca {
+        font-size: 28px;
+    }
+
+    .voltar {
+        font-size: 12px;
+    }
+
+    .principal {
+        padding: 35px 20px;
+    }
+
+    .apresentacao h1 {
+        font-size: 32px;
+    }
+
+    .linha {
+        font-size: 9px;
+    }
+
+    .formulario {
+        padding: 0;
+    }
+
+    .topo_form h2 {
+        font-size: 26px;
+    }
+
+    .rodape {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        text-align: center;
+    }
+
+}

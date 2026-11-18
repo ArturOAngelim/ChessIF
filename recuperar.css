@@ -1,0 +1,226 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background: #0d120e;
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* CABEÇALHO */
+
+.header {
+    height: 85px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 8%;
+    border-bottom: 1px solid #26342a;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo h2 {
+    font-size: 22px;
+}
+
+.logo h2 span {
+    color: #45b86b;
+}
+
+.peca {
+    color: #45b86b;
+    font-size: 35px;
+}
+
+.voltar {
+    text-decoration: none;
+    color: #c3c9c4;
+    font-size: 14px;
+}
+
+.voltar:hover {
+    color: #45b86b;
+}
+
+/* PRINCIPAL */
+
+.principal {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+/* CARD */
+
+.recuperacao {
+    width: 450px;
+    max-width: 100%;
+    padding: 45px 40px;
+    background: #151d17;
+    border: 1px solid #2c3a30;
+    border-radius: 18px;
+    text-align: center;
+}
+
+/* ÍCONE */
+
+.icone {
+    width: 75px;
+    height: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 25px;
+    border: 1px solid #34533b;
+    border-radius: 50%;
+    background: #1d3022;
+    color: #45b86b;
+    font-size: 35px;
+}
+
+/* TEXTOS */
+
+.recuperacao h1 {
+    font-size: 28px;
+    margin-bottom: 15px;
+}
+
+.descricao {
+    color: #aab5ac;
+    font-size: 14px;
+    line-height: 1.8;
+    margin-bottom: 30px;
+}
+
+/* FORM */
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: left;
+    margin-bottom: 25px;
+}
+
+.campo label {
+    color: #e0e6e1;
+    font-size: 14px;
+}
+
+.campo input {
+    width: 100%;
+    height: 52px;
+    padding: 0 15px;
+    background: #0d120e;
+    border: 1px solid #2c3a30;
+    border-radius: 8px;
+    outline: none;
+    color: white;
+    transition: 0.3s;
+}
+
+.campo input:focus {
+    border-color: #45b86b;
+    box-shadow: 0 0 10px #45b86b15;
+}
+
+.campo input::placeholder {
+    color: #657268;
+}
+
+/* BOTÃO */
+
+.btn_enviar {
+    width: 100%;
+    height: 52px;
+    background: #329653;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn_enviar:hover {
+    background: #40b566;
+    transform: translateY(-2px);
+}
+
+/* VOLTAR */
+
+.voltar_login {
+    display: inline-block;
+    margin-top: 25px;
+    color: #45b86b;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.voltar_login:hover {
+    color: #68d58b;
+}
+
+/* RODAPÉ */
+
+.rodape {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 8%;
+    border-top: 1px solid #26342a;
+    color: #657268;
+    font-size: 12px;
+}
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 500px) {
+
+    .header {
+        height: 75px;
+        padding: 0 20px;
+    }
+
+    .logo h2 {
+        font-size: 18px;
+    }
+
+    .peca {
+        font-size: 28px;
+    }
+
+    .voltar {
+        font-size: 12px;
+    }
+
+    .recuperacao {
+        padding: 35px 22px;
+    }
+
+    .recuperacao h1 {
+        font-size: 24px;
+    }
+
+    .rodape {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 10px;
+    }
+
+}
