@@ -1,589 +1,1501 @@
-*{
+
+/* =====================================
+   CONFIGURAÇÕES GERAIS
+===================================== */
+
+* {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    
-}
-@media(min-width:796px){
-    .header{
-        display: flex;
-        justify-content: space-between;
-        padding: 0px 2%;
-        text-align: center;
-        align-items: center;
-        text-decoration: none;
-        border-bottom: 3px solid green;
-        background: black;
-    }
-    .header a{
-        text-decoration: none;
-        color: green;
-        
-    }
-    .menu{
-        font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-        display: flex;
-        gap: 60px;
-        font-size: 1.6rem; 
-        
-    }
-    .inicio a,.aberturas a,.sob a,.contato a{
-        padding:10px;
-        color: white;
-    }
-    .inicio,.aberturas,.sob,.contato{
-        
-        transition: 0.7s ease;
-        
-    
-    }
-    .inicio:hover,.aberturas:hover,.sob:hover,.contato:hover{
-        
-        transition: 0.7s ease;
-        transform: scale(1.05);
-    }
-    .inicio a:hover,.aberturas a:hover,.sob a:hover,.contato a:hover{
-        color: black;        
-        background: white;
-        border-radius:20px ;
-    }
-    .header img{
-        height: 5rem;    
-        width: 3rem;
-    }
-    .apresentacao{
-        background-image: url(img/backSobre.png);
-        background-size: 100% 100%;
-        background-repeat: no-repeat;
-        background-position: center;
-        width: 100%;
-        margin:0;
-        padding: 4% 2%;
-        color: white;
-        border-bottom: 3px solid green;
-    }
-    .apresentacao h1{
-        font-size: 9rem;
-        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    }
-    .apresentacao p{
-        padding-top: 0.5%;
-    }
-    .apresentacao h3{
-        font-size: 2rem;
-    }
-    .apresentacao p{
-        font-size: 1.2rem;
-    }
-    .btn{
-        padding-top: 2%;  
-    }
-    .btn button{
-        padding: 15px 30px;
-        border-radius: 40px;
-        border: none;
-        background-color: green;
-        transition: 0.5s ease;
-        font-size: 18px;
-    }
-    .btn button:hover{
-        transition: 0.5s ease;
-        transform: scale(1.08);
-        background: #361b00;
-        color: white;
-        cursor: pointer;
-    }
-    .verde{
-        color: green;
-    }
-    .back{
-                padding:4% 2%;
-        border-bottom: 2px solid rgb(1, 73, 1);
-        background-image: url(img/desenvolvedores.png);
-        background-size: 100% 100%;
-        background-repeat: no-repeat;
-            color:white;
-            border-bottom: 5px solid green;
-    }
-    .sobre h1{
-        font-size: 6rem;
-    }
-    .sobre p{
-        padding-top: 1%;
-        font-size: 1.5rem;
-    }
-    .funcionamento{
-        display: flex;
-        justify-content: space-between;
-        padding:2% 2%;
-        color: white;
-    }
-    .texto,.testo{
-        font-size: 25px;
-        margin-top: 1%;
-    }
-    .esquerda h1{
-        color: white;
-        font-size: 4rem;
-    }
-    .direita h1{
-        color: white;
-        font-size: 4rem;
 
-    }
-    .texto ol{
-        padding-left:9%;
-        list-style-type: disc;
-        color: green;
-        display: grid;
-        gap:2px;
-    }
-    .horario{
-        border: 1px solid green;
-        background: black;
-        margin: 10px 0px;
-        margin-left: 5%;
-        padding:10px;
-        border-radius: 10px;
-    }
-    .aprenda_mais{
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .aprenda_mais button{
-        padding: 13px 40px;
-        display: flex;
-        text-align: center;
-        align-items: center;
-        border-radius: 30px;
-        font-size: 18px;
-        margin: 2% 0%;
-        background: green;
-        border: none;
-        transition: 0.5s ease;
-    }
-    .aprenda_mais button:hover{
-        transition: 0.5s ease;
-        transform:scale(1.05) ;
-        background:#361b00;
-        color: white;
-        cursor: pointer;
-    }
-    .aprenda_mais a{
-        text-decoration: none;
-    }
-    .mobile{
-        display: none;
-    }
-    .pc{
-        display: flex;
-        justify-content: space-around;
-    }
-    .integrantes{
-        width: 100%;
-        padding: 5% 2%;
-        background: black;
-        border-bottom: 3px solid green;
-    }
-    .sabrina,.Tomaz,.artur,.Helena,.Luiza,.Davi{
-        border: 1px solid gray;
-        padding: 4% 2%;
-        text-align: center;
-        border-radius: 20px;
-        transition: 1s ease;
-        color: white;
-    }
-    .sabrina:hover,.Tomaz:hover,.artur:hover,.Helena:hover,.Luiza:hover,.Davi:hover{
-        transition: 1s ease;
-        transform: scale(1.08);
-        cursor: pointer;
-    }
-    .sabrina h2,.Tomaz h2,.artur h2,.Helena h2,.Luiza h2,.Davi h2{
-        font-size: 16px;
-    }
-    .SobreIF{
-        background-image: url(img/IF_sobre.png);
-        background-size: 100% 100%;
-        background-repeat: no-repeat;
-        background-position: center;
-        color: white;
-        padding:3% 2%;
-        display:flex;
-        justify-content: space-between;
-    }
-    .esquerdaIF_2,.direitaIF{
-        padding-top: 5%;
-    }
-    .esquerdaIF h1{
-        font-size: 3.2rem;
-        color: white;
-    }
-    .esquerdaIF_2{
-        font-size: 1.5rem;
-    }
-    .direitaIF img{
-        height: 150px;
-        width: 500px;
-    }
-    .direitaIF{
-        padding-bottom: 2%;
-    }
-    .pe{
-        padding-top:2%;
-    }
-    .rodape{
-        display: flex;
-        justify-content: space-between;
-        padding:5px 2%;
-        background-color: black;
-    }
-    .logo_rodape img{
-        height:80px;
-        width: 300px;
-    }
-    .insta img,.face img,.zap img,.tele img,.email img,.loc img{
-        height: 30px;
-        width: 30px;
-    }
-    .redes{
-        display: flex;
-        gap: 20px;
-    }
-    .email{
-        color: white;
-        display: flex;
-        gap: 20px;
-    }
-    .tele{
-        color: white;
-        display: flex;
-        gap: 20px;
-    }
-    .loc{
-        color: white;
-        display: flex;
-        gap: 20px;
-    }
-    .links a{
-        text-decoration: none;
-        font-size: 18px;
-        color: green;
-    }
-    .links{
-        display: grid;
-        gap: 10px;
-    }
-    .termos{
-        display: flex;
-        justify-content: space-between;
-        padding: 0px 10px;
-        color: gray;
-        background-color: black;
-    }
-    .i,.p,.a,.i{
-        transition: 1s ease;
-    }
-    .i:hover,.p:hover,.a:hover,.s:hover{
-        transition: 1s ease;
-        transform: scale(1.08);
-    }
-    .atendimento{
-        display: grid;
-        gap: 10px;
-    }
+    font-family:
+        'Gill Sans',
+        'Gill Sans MT',
+        Calibri,
+        'Trebuchet MS',
+        sans-serif;
 }
-@media(max-width:796px){
-        *{
-        overflow-x: hidden;
-        margin: 0;
-        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif   ;
-        }
-        .header{
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    width: 100%;
+    overflow-x: hidden;
+    background: black;
+}
+
+img {
+    max-width: 100%;
+}
+
+a,
+button {
+    -webkit-tap-highlight-color: transparent;
+}
+
+a:focus-visible {
+    outline: 2px solid #32b84b;
+    outline-offset: 4px;
+}
+
+
+/* =====================================
+   CABEÇALHO
+===================================== */
+
+.header {
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0 2%;
+
+    text-align: center;
+
+    border-bottom: 3px solid green;
+    background: black;
+
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    transition:
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+}
+
+.header.rolando {
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.45);
+    border-bottom-color: #32a842;
+}
+
+
+/* LOGO */
+
+.header .logo {
+    display: flex;
+    align-items: center;
+}
+
+.header .logo img {
+    height: 5rem;
+    width: 3rem;
+    object-fit: contain;
+
+    transition: transform 0.3s ease;
+}
+
+.header .logo img:hover {
+    transform: scale(1.08);
+}
+
+
+/* MENU */
+
+.menu {
+    display: flex;
+    align-items: center;
+
+    gap: clamp(12px, 4vw, 60px);
+
+    font-size: 1.6rem;
+}
+
+.header a {
+    text-decoration: none;
+}
+
+.inicio,
+.aberturas,
+.sob,
+.contato {
+    transition: 0.3s ease;
+}
+
+.inicio a,
+.aberturas a,
+.sob a,
+.contato a {
+    display: inline-block;
+
+    padding: 10px;
+
+    color: white;
+    border-radius: 20px;
+
+    transition:
+        color 0.3s ease,
+        background 0.3s ease,
+        transform 0.3s ease;
+}
+
+.inicio a:hover,
+.aberturas a:hover,
+.sob a:hover,
+.contato a:hover {
+    color: black;
+    background: white;
+    transform: translateY(-2px);
+}
+
+
+/* =====================================
+   APRESENTAÇÃO
+===================================== */
+
+.apresentacao {
+    background-image: url(img/backSobre.png);
+
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    width: 100%;
+    min-height: 520px;
+
+    padding: 4% 2%;
+
+    display: flex;
+    align-items: center;
+
+    color: white;
+
+    border-bottom: 3px solid green;
+
+    position: relative;
+    isolation: isolate;
+}
+
+
+/* SOMBRA SOBRE A IMAGEM */
+
+.apresentacao::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background: linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0.55),
+        rgba(0, 0, 0, 0.08)
+    );
+
+    z-index: -1;
+}
+
+.apresentacao-conteudo {
+    max-width: 850px;
+}
+
+.apresentacao h1 {
+    font-size: clamp(4rem, 12vw, 9rem);
+
+    font-family:
+        Cambria,
+        Cochin,
+        Georgia,
+        Times,
+        'Times New Roman',
+        serif;
+
+    line-height: 1.05;
+    margin: 15px 0;
+}
+
+.apresentacao h3 {
+    font-size: clamp(1rem, 2.5vw, 2rem);
+    line-height: 1.4;
+}
+
+.apresentacao p {
+    padding-top: 1%;
+
+    font-size: 1.2rem;
+    line-height: 1.6;
+
+    max-width: 550px;
+}
+
+.verde {
+    color: green;
+}
+
+
+/* BOTÃO DA APRESENTAÇÃO */
+
+.btn {
+    padding-top: 2%;
+}
+
+.btn a {
+    display: inline-block;
+
+    padding: 15px 30px;
+    margin-top: 12px;
+
+    border-radius: 40px;
+    border: none;
+
+    background-color: green;
+    color: white;
+
+    font-size: 18px;
+    text-decoration: none;
+
+    transition:
+        background 0.4s ease,
+        transform 0.4s ease,
+        box-shadow 0.4s ease;
+}
+
+.btn a:hover {
+    transform: translateY(-4px);
+
+    background: #361b00;
+    color: white;
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+}
+
+
+/* =====================================
+   SOBRE O PROJETO
+===================================== */
+
+.back {
+    padding: 4% 2%;
+
+    border-bottom: 5px solid green;
+
+    background-image: url(img/desenvolvedores.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    color: white;
+
+    position: relative;
+    isolation: isolate;
+}
+
+.back::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.48);
+
+    z-index: -1;
+}
+
+.sobre {
+    max-width: 1000px;
+}
+
+.sobre h1 {
+    font-size: clamp(2.5rem, 6vw, 6rem);
+}
+
+.sobre p {
+    padding-top: 1%;
+
+    font-size: clamp(1rem, 2vw, 1.5rem);
+
+    line-height: 1.7;
+    max-width: 900px;
+}
+
+
+/* =====================================
+   FUNCIONAMENTO E HORÁRIOS
+===================================== */
+
+.funcionamento {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: flex-start;
+
+    gap: 50px;
+
+    padding: 3% 2%;
+
+    color: white;
+}
+
+.esquerda,
+.direita {
+    flex: 1;
+    min-width: 0;
+}
+
+.esquerda h1,
+.direita h1 {
+    color: white;
+
+    font-size: clamp(2rem, 4vw, 4rem);
+}
+
+.texto,
+.testo {
+    font-size: clamp(1rem, 1.6vw, 25px);
+
+    margin-top: 2%;
+
+    line-height: 1.6;
+}
+
+.texto h3,
+.testo h3 {
+    font-size: 0.95em;
+}
+
+.texto ol {
+    padding-left: 9%;
+    margin: 15px 0;
+
+    list-style-type: disc;
+
+    color: green;
+
+    display: grid;
+    gap: 8px;
+}
+
+.texto li {
+    padding-left: 5px;
+
+    transition:
+        color 0.3s ease,
+        transform 0.3s ease;
+}
+
+.texto li:hover {
+    color: #4fc75e;
+    transform: translateX(5px);
+}
+
+
+/* HORÁRIOS */
+
+.horario {
+    border: 1px solid green;
+
+    background: black;
+
+    margin: 15px 0;
+    margin-left: 5%;
+
+    padding: 15px;
+
+    border-radius: 10px;
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+}
+
+.horario h3 {
+    line-height: 1.8;
+}
+
+.horario.destacado {
+    transform: translateY(-4px);
+
+    border-color: #4ac75d;
+
+    box-shadow: 0 8px 22px rgba(0, 128, 0, 0.2);
+}
+
+
+/* =====================================
+   BOTÃO APRENDA MAIS
+===================================== */
+
+.aprenda_mais {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px 0;
+}
+
+.aprenda_mais a {
+    display: inline-block;
+
+    padding: 13px 40px;
+
+    text-align: center;
+
+    border-radius: 30px;
+
+    font-size: 18px;
+
+    background: green;
+    border: none;
+
+    color: white;
+    text-decoration: none;
+
+    transition:
+        transform 0.3s ease,
+        background 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.aprenda_mais a:hover {
+    transform: translateY(-4px) scale(1.03);
+
+    background: #361b00;
+    color: white;
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+
+/* =====================================
+   INTEGRANTES
+===================================== */
+
+.integrantes {
+    width: 100%;
+
+    padding: 5% 3%;
+
+    background: black;
+
+    border-bottom: 3px solid green;
+}
+
+
+/* TÍTULO */
+
+.titulo-integrantes {
+    text-align: center;
+
+    color: white;
+
+    margin-bottom: 45px;
+}
+
+.titulo-integrantes > span {
+    font-size: 13px;
+
+    letter-spacing: 3px;
+
+    font-weight: bold;
+}
+
+.titulo-integrantes h1 {
+    font-size: clamp(1.8rem, 4vw, 3rem);
+
+    margin: 12px 0;
+}
+
+.titulo-integrantes p {
+    font-size: 17px;
+    color: #bdbdbd;
+
+    line-height: 1.6;
+}
+
+
+/* GRADE DOS INTEGRANTES */
+
+.grade-integrantes {
+    display: grid;
+
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+
+    gap: 18px;
+}
+
+
+/* CARTÕES */
+
+.integrante-card {
+    border: 1px solid gray;
+
+    padding: 25px 12px;
+
+    text-align: center;
+
+    border-radius: 20px;
+
+    color: white;
+    background: #080808;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 10px;
+
+    min-width: 0;
+
+    transition:
+        transform 0.35s ease,
+        border-color 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+.integrante-card:hover {
+    transform: translateY(-8px);
+
+    border-color: green;
+
+    box-shadow: 0 10px 25px rgba(0, 128, 0, 0.2);
+}
+
+
+/* ESPAÇO DA FOTO */
+
+.foto-integrante {
+    width: 105px;
+    height: 105px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background: linear-gradient(
+        145deg,
+        #143d1a,
+        #071007
+    );
+
+    border: 2px solid green;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    overflow: hidden;
+
+    transition:
+        transform 0.4s ease,
+        box-shadow 0.4s ease;
+}
+
+.foto-integrante span {
+    color: #58bd63;
+
+    font-size: 40px;
+
+    font-weight: bold;
+}
+
+.integrante-card:hover .foto-integrante {
+    transform: scale(1.07);
+
+    box-shadow: 0 0 20px rgba(0, 128, 0, 0.3);
+}
+
+.integrante-card h2 {
+    font-size: 21px;
+}
+
+.integrante-card h3 {
+    font-size: 14px;
+}
+
+
+/* =====================================
+   SOBRE O IF SUDESTE MG
+===================================== */
+
+.SobreIF {
+    width: 100%;
+    min-width: 0;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.6fr)
+        minmax(220px, 0.8fr);
+
+    align-items: center;
+
+    gap: clamp(25px, 5vw, 70px);
+
+    padding: 55px 6%;
+
+    background-image: url(img/IF_sobre.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    position: relative;
+    isolation: isolate;
+
+    overflow: hidden;
+}
+
+.SobreIF::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.55);
+
+    z-index: -1;
+}
+
+
+/* TEXTO DO INSTITUTO */
+
+.esquerdaIF {
+    width: 100%;
+    min-width: 0;
+}
+
+.identificacaoIF {
+    display: block;
+
+    color: #40ba50;
+
+    font-size: 13px;
+    font-weight: bold;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 15px;
+}
+
+.esquerdaIF h1 {
+    color: white;
+
+    font-size: clamp(28px, 3.5vw, 48px);
+
+    line-height: 1.25;
+
+    max-width: 750px;
+}
+
+.esquerdaIF_2 {
+    width: 100%;
+    max-width: 760px;
+
+    padding-top: 25px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 18px;
+}
+
+.esquerdaIF_2 p {
+    color: white;
+
+    font-size: clamp(15px, 1.4vw, 19px);
+
+    line-height: 1.8;
+
+    text-align: left;
+
+    overflow-wrap: break-word;
+}
+
+.pe {
+    padding-top: 0;
+}
+
+
+/* LOGO DO INSTITUTO */
+
+.direitaIF {
+    width: 100%;
+    min-width: 0;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    padding: 15px;
+}
+
+.direitaIF img {
+    display: block;
+
+    width: 100%;
+
+    max-width: 360px;
+
+    height: auto;
+
+    max-height: 200px;
+
+    object-fit: contain;
+
+    transition: transform 0.4s ease;
+}
+
+.direitaIF img:hover {
+    transform: scale(1.05);
+}
+
+
+/* =====================================
+   RODAPÉ
+===================================== */
+
+.rodape {
+    width: 100%;
+    min-width: 0;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.1fr)
+        minmax(150px, 0.7fr)
+        minmax(0, 1.4fr);
+
+    align-items: start;
+
+    gap: 35px;
+
+    padding: 35px 5%;
+
+    background-color: black;
+
+    color: white;
+}
+
+
+/* LOGO DO RODAPÉ */
+
+.logo_rodape {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 20px;
+}
+
+.img_rodape {
+    display: block;
+
+    width: 100%;
+    max-width: 260px;
+
+    height: 80px;
+
+    object-fit: contain;
+    object-position: left center;
+}
+
+
+/* REDES SOCIAIS */
+
+.redes {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+}
+
+.redes a {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    transition: transform 0.3s ease;
+}
+
+.redes a:hover {
+    transform: translateY(-5px) scale(1.1);
+}
+
+.redes img {
+    display: block;
+
+    width: 30px;
+    height: 30px;
+
+    object-fit: contain;
+}
+
+
+/* LINKS RÁPIDOS */
+
+.links {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 13px;
+}
+
+.links h2 {
+    font-size: 22px;
+
+    margin-bottom: 5px;
+}
+
+.links a {
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 16px;
+
+    transition:
+        color 0.3s ease,
+        transform 0.3s ease;
+}
+
+.links a:hover {
+    color: #42bd50;
+
+    transform: translateX(5px);
+}
+
+
+/* ATENDIMENTO */
+
+.atendimento {
+    width: 100%;
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 18px;
+}
+
+.atendimento h2 {
+    font-size: 22px;
+
+    margin-bottom: 5px;
+}
+
+.email,
+.tele,
+.loc {
+    width: 100%;
+    min-width: 0;
+
+    display: grid;
+
+    grid-template-columns: 25px minmax(0, 1fr);
+
+    align-items: center;
+
+    gap: 12px;
+
+    color: white;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+}
+
+.email img,
+.tele img,
+.loc img {
+    width: 23px;
+    height: 23px;
+
+    object-fit: contain;
+
+    flex-shrink: 0;
+}
+
+.email a,
+.tele a {
+    color: white;
+
+    text-decoration: none;
+
+    overflow-wrap: anywhere;
+
+    transition: color 0.3s ease;
+}
+
+.email a:hover,
+.tele a:hover {
+    color: #42bd50;
+}
+
+.loc p {
+    min-width: 0;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* =====================================
+   TERMOS E DIREITOS
+===================================== */
+
+.termos {
+    width: 100%;
+    min-width: 0;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 10px 25px;
+
+    padding: 15px 5%;
+
+    color: gray;
+
+    background-color: black;
+
+    border-top: 1px solid #242424;
+
+    font-size: 12px;
+}
+
+.t,
+.Ed {
+    min-width: 0;
+    padding: 0;
+}
+
+.termos p {
+    line-height: 1.6;
+}
+
+
+/* =====================================
+   ANIMAÇÕES DE ENTRADA
+===================================== */
+
+.revelar {
+    opacity: 0;
+
+    transform: translateY(25px);
+
+    transition:
+        opacity 0.7s ease,
+        transform 0.7s ease;
+
+    transition-delay: var(--atraso, 0ms);
+}
+
+.revelar.visivel {
+    opacity: 1;
+
+    transform: translateY(0);
+}
+
+
+/* =====================================
+   TABLETS
+===================================== */
+
+@media (max-width: 1050px) {
+
+    .grade-integrantes {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .integrantes {
+        padding: 6% 4%;
+    }
+
+    .menu {
+        gap: 20px;
+
+        font-size: 1.3rem;
+    }
+
+    .funcionamento {
+        gap: 25px;
+    }
+
+    .esquerdaIF_2 {
+        font-size: 1.1rem;
+    }
+
+}
+
+
+/* =====================================
+   AJUSTES PARA TABLETS E CELULARES
+===================================== */
+
+@media (max-width: 796px) {
+
+    /* CABEÇALHO */
+
+    .header {
         width: 100%;
+
         display: flex;
+        flex-direction: row;
+
         justify-content: space-between;
-        padding: 1rem 1rem;
-        text-align: center;
         align-items: center;
-        text-decoration: none;
-        border-bottom: 3px solid green;
-        background: black;
+
+        padding: 8px 10px;
+
+        gap: 5px;
     }
-    .header a{
-        text-decoration: none;
-        color: green;
-        
+
+    .header .logo img {
+        height: 55px;
+        width: 65px;
     }
-    .menu{
-        font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+    .menu {
         display: flex;
-        gap:20px;
-        font-size: 1.2rem; 
+
+        align-items: center;
+        justify-content: flex-end;
+
+        flex-wrap: nowrap;
+
+        gap: clamp(5px, 2vw, 15px);
+
+        font-size: clamp(0.7rem, 2.5vw, 1rem);
     }
-    .inicio,.aberturas,.sob,.contato{
-        transition: 0.7s ease;
+
+    .inicio a,
+    .aberturas a,
+    .sob a,
+    .contato a {
+        padding: 6px 4px;
+
+        white-space: nowrap;
     }
-    .inicio:hover,.aberturas:hover,.sob:hover,.contato:hover{
-        transition: 0.7s ease;
-        transform: scale(1.05);
-    }
-    .header img{
-        height: 5rem;    
-        width: 4rem;
-    }
-    .apresentacao{
-        background-image: url(img/backSobre.png);
-        background-size: 100% 100%;
-        background-repeat: no-repeat;
+
+
+    /* APRESENTAÇÃO */
+
+    .apresentacao {
+        min-height: 400px;
+
+        padding: 40px 5%;
+
         background-position: center;
-        width: 100%;
-        margin:0;
-        padding: 4% 2%;
-        color: white;
-        border-bottom: 3px solid green;
     }
-    .apresentacao{
-        background-image: url(img/backSobre.png);
-        background-size: 100% 100%;
-        background-repeat: no-repeat;
-        background-position: center;
-        width: 100%;
-        margin:0;
-        padding: 4% 2%;
-        color: white;
-        border-bottom: 3px solid green;
+
+    .apresentacao h1 {
+        font-size: 3.5rem;
     }
-    .apresentacao h3{
-        font-size: 1rem;
+
+    .apresentacao h3 {
+        font-size: 1.15rem;
     }
-    .apresentacao h1{
-        font-size: 2rem;
-        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    }
-    .apresentacao p{
-        padding-top: 0.5%;
-    }
-    .btn{
-        padding-top: 2%;  
-    }
-    .btn button{
-        padding: 10px 20px;
-        border-radius: 40px;
-        border: none;
-        background-color: green;
-        transition: 0.5s ease;
-        font-size: 18px;
-    }
-    .btn button:hover{
-        transition: 0.5s ease;
-        transform: scale(1.08);
-        background: #361b00;
-        color: white;
-        cursor: pointer;
-    }
-    .verde{
-        color: green;
-    }
-    .sobre{
-        padding:4% 2%;
-        border-bottom: 2px solid rgb(1, 73, 1);
-        background-image: url(img/desenvolvedores.png);
-        background-size: 100% 100%;
-        background-repeat: no-repeat;
-            color:white;
-    }
-    .sobre h1{
-        font-size: 2rem;
-    }
-    .sobre p{
-        padding-top: 1%;
+
+    .apresentacao p {
         font-size: 15px;
-    }
-    .funcionamento{
-        display: flex;
-        justify-content: space-around;
-        padding:2% 2%;
-        background-color: black;
-        color: white;
-        border-bottom: 1px solid rgb(1, 49, 1);
-    }
-    .esquerda h1{
-        font-size: 2rem;
-    }
-    .texto,.testo{
-        margin-top: 1%;
-    }
-    .texto ol{
-        padding-left:9%;
-        list-style-type: disc;
-        font-size: 1rem;
-        color: green;
-        display: grid;
-        gap:2px;
-    }
-    .horario{
-        margin: 10px 0px;
-        margin-left: 5%;
-        padding:10px;
-        border-radius: 10px;
-        border: 1px solid green;
-    }
-    .aprenda_mais{
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: black;
-    }
-    .aprenda_mais button{
-        padding: 12px 24px;
-        display: flex;
-        text-align: center;
-        align-items: center;
-        border-radius: 30px;
-        font-size: 18px;
-        margin: 2% 0%;
-        background: green;
-        border: none;
-        transition: 0.5s ease;
-    }
-    .aprenda_mais button:hover{
-        transition: 0.5s ease;
-        transform:scale(1.05) ;
-        background:#361b00;
-        color: white;
-        cursor: pointer;
-    }
-    .aprenda_mais a{
-        text-decoration: none;
-    }
-    .integrantes{
-        display: inline-flex;
-        justify-content: space-around;
-        width: 100%;
-        padding: 5% 5%;
-        background: black;
-        border-bottom: 3px solid green;
-    }
-    .mobile{
-        display: grid;
-        gap: 20px;
-    }
-    .sabrina,.Tomaz,.artur,.Helena,.Luiza,.Davi{
-        display: grid;
-        border: 1px solid gray;
-        padding: 4% 2%;
-        text-align: center;
-        border-radius: 20px;
-        transition: 1s ease;
-        color: white;
-    }
-    .sabrina:hover,.Tomaz:hover,.artur:hover,.Helena:hover,.Luiza:hover,.Davi:hover{
-        transition: 1s ease;
-        transform: scale(1.08);
-        cursor: pointer;
-    }
-    .sabrina h2,.Tomaz h2,.artur h2,.Helena h2,.Luiza h2,.Davi h2{
-        font-size: 16px;
-    }
-    .SobreIF{
-        background-image: url(img/IF_sobre.png);
-        background-size: 100% 100%;
-        background-repeat: no-repeat;
-        background-position: center;
-        color: white;
-        padding:3% 2%;
-        display:flex;
-        justify-content: space-evenly;
+
+        max-width: 450px;
     }
 
-    .esquerdaIF_2,.direitaIF{
-        padding-top: 5%;
+    .btn a {
+        font-size: 16px;
+
+        padding: 12px 24px;
     }
-    .SobreIF h1{
-        font-size: 1.2rem;
+
+
+    /* SOBRE O PROJETO */
+
+    .back {
+        padding: 6% 4%;
+
+        background-position: center;
     }
-    .SobreIF h4{
-        font-size: 0.9rem;
-        font-family: Arial, Helvetica, sans-serif;
+
+    .sobre h1 {
+        font-size: 2.5rem;
     }
-    .direitaIF img{
-        height: 80px;
-        width: 250px;
+
+    .sobre p {
+        font-size: 16px;
     }
-    .direitaIF{
-        padding-bottom: 2%;
-    }
-    .pe{
-        padding-top:2%;
-    }
-    .rodape{
+
+
+    /* FUNCIONAMENTO */
+
+    .funcionamento {
         display: flex;
-        justify-content: space-between;
-        padding:5px 2%;
-        background-color: black;
+        flex-direction: column;
+
+        gap: 35px;
+
+        padding: 30px 2%;
+
+        background: transparent;
     }
-    .logo_rodape img{
-        height:80px;
-        width: 200px;
+
+    .esquerda,
+    .direita {
+        width: 100%;
     }
-    .insta img,.face img,.zap img,.tele img,.email img,.loc img{
-        height: 30px;
-        width: 30px;
+
+    .esquerda h1,
+    .direita h1 {
+        font-size: 2rem;
     }
-    .redes{
-        display: flex;
-        gap: 20px;
+
+    .texto,
+    .testo {
+        font-size: 16px;
     }
-    .email{
-        color: white;
-        display: flex;
-        gap: 20px;
+
+    .texto ol {
+        padding-left: 7%;
     }
-    .tele{
-        color: white;
-        display: flex;
-        gap: 20px;
+
+    .horario {
+        margin-left: 0;
+
+        padding: 12px;
     }
-    .loc{
-        color: white;
-        display: flex;
-        gap: 20px;
+
+
+    /* BOTÃO APRENDA MAIS */
+
+    .aprenda_mais a {
+        font-size: 15px;
+
+        padding: 12px 25px;
     }
-    .links a{
-        text-decoration: none;
-        font-size: 18px;
-        color: green;
+
+
+    /* INTEGRANTES */
+
+    .integrantes {
+        padding: 8% 5%;
     }
-    .links{
+
+    .titulo-integrantes {
+        margin-bottom: 30px;
+    }
+
+    .titulo-integrantes h1 {
+        font-size: 2rem;
+    }
+
+    .titulo-integrantes p {
+        font-size: 14px;
+    }
+
+    .grade-integrantes {
         display: grid;
+
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+        gap: 15px;
+    }
+
+    .integrante-card {
+        padding: 20px 8px;
+    }
+
+    .foto-integrante {
+        width: 85px;
+        height: 85px;
+    }
+
+    .foto-integrante span {
+        font-size: 32px;
+    }
+
+    .integrante-card h2 {
+        font-size: 18px;
+    }
+
+    .integrante-card h3 {
+        font-size: 12px;
+    }
+
+
+    /* SOBRE O INSTITUTO */
+
+    .SobreIF {
+        grid-template-columns: minmax(0, 1fr);
+
+        gap: 25px;
+
+        padding: 40px 6%;
+
+        background-position: center;
+    }
+
+    .esquerdaIF {
+        width: 100%;
+    }
+
+    .esquerdaIF h1 {
+        font-size: 27px;
+    }
+
+    .esquerdaIF_2 {
+        padding-top: 18px;
+
+        gap: 15px;
+    }
+
+    .esquerdaIF_2 p {
+        font-size: 15px;
+
+        line-height: 1.7;
+    }
+
+    .direitaIF {
+        width: 100%;
+
+        padding: 10px 0 0;
+    }
+
+    .direitaIF img {
+        width: 100%;
+
+        max-width: 230px;
+
+        max-height: 140px;
+    }
+
+
+    /* RODAPÉ */
+
+    .rodape {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+
+        justify-items: stretch;
+
+        gap: 30px;
+
+        padding: 30px 7%;
+    }
+
+    .logo_rodape {
+        grid-column: 1 / -1;
+
+        align-items: center;
+
+        width: 100%;
+    }
+
+    .img_rodape {
+        max-width: 220px;
+
+        object-position: center;
+    }
+
+    .redes {
+        justify-content: center;
+    }
+
+    .links {
+        width: 100%;
+
+        align-items: center;
+
+        padding-top: 20px;
+
+        border-top: 1px solid #333;
+    }
+
+    .atendimento {
+        width: 100%;
+
+        grid-column: 1 / -1;
+
+        display: flex;
+
+        padding-top: 20px;
+
+        border-top: 1px solid #333;
+    }
+
+    .atendimento h2 {
+        text-align: center;
+    }
+
+    .email,
+    .tele,
+    .loc {
+        max-width: 380px;
+
+        margin: 0 auto;
+    }
+
+
+    /* TERMOS */
+
+    .termos {
+        flex-direction: column;
+
+        text-align: center;
+
+        justify-content: center;
+
+        padding: 12px 5%;
+
+        font-size: 11px;
+    }
+
+    .t,
+    .Ed {
+        width: 100%;
+    }
+
+}
+
+
+/* =====================================
+   CELULARES PEQUENOS
+===================================== */
+
+@media (max-width: 420px) {
+
+    /* CABEÇALHO */
+
+    .header {
+        padding: 5px;
+
+        gap: 3px;
+    }
+
+    .header .logo img {
+        width: 55px;
+        height: 50px;
+    }
+
+    .menu {
+        gap: 4px;
+
+        font-size: 0.7rem;
+    }
+
+    .inicio a,
+    .aberturas a,
+    .sob a,
+    .contato a {
+        padding: 5px 3px;
+    }
+
+
+    /* APRESENTAÇÃO */
+
+    .apresentacao {
+        min-height: 350px;
+
+        padding: 30px 4%;
+    }
+
+    .apresentacao h1 {
+        font-size: 2.8rem;
+    }
+
+    .apresentacao h3 {
+        font-size: 1rem;
+    }
+
+    .apresentacao p {
+        font-size: 13px;
+    }
+
+
+    /* SOBRE */
+
+    .sobre h1 {
+        font-size: 2rem;
+    }
+
+    .sobre p {
+        font-size: 14px;
+
+        line-height: 1.6;
+    }
+
+
+    /* INTEGRANTES */
+
+    .grade-integrantes {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+
         gap: 10px;
     }
-    .termos{
-        font-size: 14px;
-        display: flex;
-        justify-content: space-between;
-        padding: 0px 10px;
-        color: gray;
-        background-color: black;
+
+    .integrante-card {
+        padding: 15px 5px;
     }
-    .i,.p,.a,.i{
-        transition: 1s ease;
+
+    .foto-integrante {
+        width: 70px;
+        height: 70px;
     }
-    .i:hover,.p:hover,.a:hover,.s:hover{
-        transition: 1s ease;
-        transform: scale(1.08);
+
+    .integrante-card h2 {
+        font-size: 16px;
     }
-    .pc{
-        display: none;
+
+    .integrante-card h3 {
+        font-size: 11px;
     }
-    .atendimento{
-        display: none;
-        }
-    .aa{
-        display: none;
+
+
+    /* RODAPÉ */
+
+    .links h2 {
+        font-size: 16px;
     }
+
+    .links a {
+        font-size: 13px;
+    }
+
+}
+
+
+/* =====================================
+   ACESSIBILIDADE
+===================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+
+        animation-iteration-count: 1 !important;
+
+        transition-duration: 0.01ms !important;
+    }
+
+    .revelar {
+        opacity: 1;
+        transform: none;
+    }
+
 }

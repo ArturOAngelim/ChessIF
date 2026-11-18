@@ -1,0 +1,804 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IFChess | Aberturas</title>
+    <link rel="stylesheet" href="aberturas.css">
+</head>
+
+<body>
+
+    <!-- CABEÇALHO -->
+    <header class="topo" id="inicio">
+
+        <a href="index.html" class="logo">
+            <span>♛</span>
+            IFChess
+        </a>
+
+        <nav class="menu">
+            <a href="index.html">Início</a>
+
+            <a href="aberturas.html" class="selecionado">
+                Aberturas
+            </a>
+
+            <a href="login.html" class="link-login">
+                Login
+            </a>
+        </nav>
+
+    </header>
+
+
+    <!-- APRESENTAÇÃO -->
+    <section class="hero">
+
+        <div class="hero-conteudo">
+
+            <span class="etiqueta">GUIA DE XADREZ</span>
+
+            <h1>
+                Conheça as principais
+                <span>aberturas do xadrez</span>
+            </h1>
+
+            <p>
+                Descubra as estratégias utilizadas desde os primeiros
+                movimentos da partida. Explore as principais aberturas,
+                conheça seus lances iniciais e entenda suas ideias.
+            </p>
+
+            <a href="#catalogo-aberturas" class="botao-hero">
+                Explorar aberturas →
+            </a>
+
+        </div>
+
+        <div class="hero-simbolo">
+            ♞
+        </div>
+
+    </section>
+
+
+    <!-- INTRODUÇÃO -->
+    <section class="introducao">
+
+        <div class="introducao-texto">
+
+            <span class="subtitulo">ESTRATÉGIA E CONHECIMENTO</span>
+
+            <h2>O início de uma grande partida</h2>
+
+            <p>
+                Uma abertura corresponde aos primeiros movimentos de uma
+                partida de xadrez. Cada uma apresenta diferentes planos,
+                estruturas de peões e possibilidades estratégicas.
+            </p>
+
+        </div>
+
+        <div class="nota">
+
+            <span>♟</span>
+
+            <div>
+
+                <h3>Sobre os lances</h3>
+
+                <p>
+                    Os movimentos apresentados indicam a sequência inicial
+                    que caracteriza cada abertura. Não são apresentadas
+                    variantes ou ramificações.
+                </p>
+
+                <small>
+                    C = Cavalo | B = Bispo
+                </small>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- CATÁLOGO -->
+    <main class="catalogo-area" id="catalogo-aberturas">
+
+        <div class="catalogo-titulo">
+
+            <span class="subtitulo">CATÁLOGO IFCHESS</span>
+
+            <h2>Explore as aberturas</h2>
+
+            <p>
+                Pesquise pelo nome ou pelos lances e escolha uma categoria.
+            </p>
+
+        </div>
+
+
+        <!-- PESQUISA -->
+        <div class="pesquisa-area">
+
+            <div class="campo-pesquisa">
+
+                <span>⌕</span>
+
+                <input
+                    type="text"
+                    id="busca"
+                    placeholder="Pesquisar abertura ou lance..."
+                    aria-label="Pesquisar abertura"
+                >
+
+            </div>
+
+        </div>
+
+
+        <!-- FILTROS -->
+        <div class="filtros">
+
+            <button class="filtro ativo" data-filtro="todas">
+                Todas
+            </button>
+
+            <button class="filtro" data-filtro="abertas">
+                Abertas
+            </button>
+
+            <button class="filtro" data-filtro="semiabertas">
+                Semiabertas
+            </button>
+
+            <button class="filtro" data-filtro="fechadas">
+                Fechadas
+            </button>
+
+            <button class="filtro" data-filtro="flanco">
+                De flanco
+            </button>
+
+        </div>
+
+
+        <p class="resultado" id="resultado" aria-live="polite"></p>
+
+        <!-- ABERTURAS GERADAS PELO JAVASCRIPT -->
+        <div id="catalogo"></div>
+
+    </main>
+
+
+    <!-- RODAPÉ -->
+    <footer class="rodape">
+
+        <div class="rodape-conteudo">
+
+            <a href="index.html" class="logo">
+                <span>♛</span>
+                IFChess
+            </a>
+
+            <p>
+                Uma comunidade, diversas estratégias e infinitas possibilidades.
+            </p>
+
+            <a href="#inicio" class="voltar-topo">
+                Voltar ao início ↑
+            </a>
+
+        </div>
+
+        <div class="direitos">
+            IFChess © 2026
+        </div>
+
+    </footer>
+
+
+    <!-- JAVASCRIPT -->
+    <script>
+
+        // CATEGORIAS DAS ABERTURAS
+
+        const categorias = [
+
+            {
+                id: "abertas",
+                titulo: "Jogos abertos",
+                descricao: "Começam com 1. e4 e5. Geralmente levam a posições abertas e desenvolvimento rápido das peças.",
+                etiqueta: "Abertura aberta"
+            },
+
+            {
+                id: "semiabertas",
+                titulo: "Jogos semiabertos",
+                descricao: "Começam com 1. e4 e uma resposta diferente de 1... e5, criando estruturas assimétricas.",
+                etiqueta: "Abertura semiaberta"
+            },
+
+            {
+                id: "fechadas",
+                titulo: "Jogos fechados e semi-fechados",
+                descricao: "Reúnem sistemas de peão da dama, defesas indianas e outras estruturas iniciadas frequentemente com 1. d4.",
+                etiqueta: "Abertura fechada"
+            },
+
+            {
+                id: "flanco",
+                titulo: "Aberturas de flanco",
+                descricao: "Começam com movimentos como 1. c4, 1. Cf3 ou 1. b3, controlando o centro de maneira indireta.",
+                etiqueta: "Abertura de flanco"
+            }
+
+        ];
+
+
+        // LISTA DE ABERTURAS
+
+        const aberturas = [
+
+            // =====================================
+            // JOGOS ABERTOS
+            // =====================================
+
+            {
+                nome: "Abertura Italiana",
+                categoria: "abertas",
+                lances: "1. e4 e5 2. Cf3 Cc6 3. Bc4",
+                descricao: "Desenvolve rapidamente as peças e direciona o bispo para o ponto f7, buscando iniciativa no centro."
+            },
+
+            {
+                nome: "Abertura Espanhola",
+                categoria: "abertas",
+                lances: "1. e4 e5 2. Cf3 Cc6 3. Bb5",
+                descricao: "Pressiona o cavalo que defende o peão central e busca criar pressão estratégica sobre o centro."
+            },
+
+            {
+                nome: "Jogo Escocês",
+                categoria: "abertas",
+                lances: "1. e4 e5 2. Cf3 Cc6 3. d4",
+                descricao: "Busca abrir rapidamente o centro, proporcionando um jogo dinâmico e desenvolvimento ativo."
+            },
+
+            {
+                nome: "Abertura Vienense",
+                categoria: "abertas",
+                lances: "1. e4 e5 2. Cc3",
+                descricao: "Desenvolve o cavalo para o centro e mantém diferentes possibilidades de ataque."
+            },
+
+            {
+                nome: "Gambito do Rei",
+                categoria: "abertas",
+                lances: "1. e4 e5 2. f4",
+                descricao: "Oferece um peão para acelerar o desenvolvimento e abrir linhas de ataque contra o rei adversário."
+            },
+
+            {
+                nome: "Abertura dos Quatro Cavalos",
+                categoria: "abertas",
+                lances: "1. e4 e5 2. Cf3 Cc6 3. Cc3 Cf6",
+                descricao: "Apresenta desenvolvimento simétrico dos cavalos e disputa equilibrada pelo controle central."
+            },
+
+            {
+                nome: "Defesa Petroff",
+                categoria: "abertas",
+                lances: "1. e4 e5 2. Cf3 Cf6",
+                descricao: "As pretas respondem ao ataque central com um contra-ataque, buscando equilíbrio e solidez."
+            },
+
+            {
+                nome: "Defesa Philidor",
+                categoria: "abertas",
+                lances: "1. e4 e5 2. Cf3 d6",
+                descricao: "Defende o peão central e procura construir uma estrutura sólida para as pretas."
+            },
+
+            {
+                nome: "Abertura Ponziani",
+                categoria: "abertas",
+                lances: "1. e4 e5 2. Cf3 Cc6 3. c3",
+                descricao: "Prepara o avanço d4, buscando construir um centro forte de peões."
+            },
+
+            {
+                nome: "Abertura do Bispo",
+                categoria: "abertas",
+                lances: "1. e4 e5 2. Bc4",
+                descricao: "Desenvolve o bispo rapidamente e coloca pressão sobre a região do rei adversário."
+            },
+
+
+            // =====================================
+            // JOGOS SEMIABERTOS
+            // =====================================
+
+            {
+                nome: "Defesa Siciliana",
+                categoria: "semiabertas",
+                lances: "1. e4 c5",
+                descricao: "Cria uma estrutura assimétrica e oferece às pretas oportunidades de contra-ataque."
+            },
+
+            {
+                nome: "Defesa Francesa",
+                categoria: "semiabertas",
+                lances: "1. e4 e6",
+                descricao: "Prepara o avanço ...d5, disputando o centro e criando uma estrutura estratégica."
+            },
+
+            {
+                nome: "Defesa Caro-Kann",
+                categoria: "semiabertas",
+                lances: "1. e4 c6",
+                descricao: "Prepara o avanço ...d5 e busca uma estrutura sólida para as pretas."
+            },
+
+            {
+                nome: "Defesa Escandinava",
+                categoria: "semiabertas",
+                lances: "1. e4 d5",
+                descricao: "Ataca imediatamente o peão central branco, buscando simplificar a disputa pelo centro."
+            },
+
+            {
+                nome: "Defesa Alekhine",
+                categoria: "semiabertas",
+                lances: "1. e4 Cf6",
+                descricao: "Provoca o avanço dos peões brancos para depois pressionar o centro adversário."
+            },
+
+            {
+                nome: "Defesa Pirc",
+                categoria: "semiabertas",
+                lances: "1. e4 d6 2. d4 Cf6 3. Cc3 g6",
+                descricao: "Permite que as brancas ocupem o centro e prepara o desenvolvimento do bispo por g7."
+            },
+
+            {
+                nome: "Defesa Moderna",
+                categoria: "semiabertas",
+                lances: "1. e4 g6",
+                descricao: "Adota uma estratégia hipermoderna, controlando o centro à distância com as peças."
+            },
+
+            {
+                nome: "Defesa Nimzowitsch",
+                categoria: "semiabertas",
+                lances: "1. e4 Cc6",
+                descricao: "Desenvolve o cavalo rapidamente e mantém flexibilidade na disputa pelo centro."
+            },
+
+            {
+                nome: "Defesa Owen",
+                categoria: "semiabertas",
+                lances: "1. e4 b6",
+                descricao: "Prepara o desenvolvimento do bispo em b7, exercendo pressão sobre o centro."
+            },
+
+
+            // =====================================
+            // JOGOS FECHADOS E SEMI-FECHADOS
+            // =====================================
+
+            {
+                nome: "Gambito da Dama",
+                categoria: "fechadas",
+                lances: "1. d4 d5 2. c4",
+                descricao: "As brancas oferecem temporariamente o peão c4 para disputar o controle do centro."
+            },
+
+            {
+                nome: "Defesa do Gambito da Dama",
+                categoria: "fechadas",
+                lances: "1. d4 d5 2. c4 e6",
+                descricao: "As pretas sustentam o centro e constroem uma posição sólida contra a pressão branca."
+            },
+
+            {
+                nome: "Defesa Eslava",
+                categoria: "fechadas",
+                lances: "1. d4 d5 2. c4 c6",
+                descricao: "Defende o peão central com c6, mantendo uma estrutura resistente."
+            },
+
+            {
+                nome: "Defesa Semi-Eslava",
+                categoria: "fechadas",
+                lances: "1. d4 d5 2. c4 c6 3. Cf3 Cf6 4. Cc3 e6",
+                descricao: "Combina a estrutura da Defesa Eslava com o desenvolvimento do bispo de casas claras."
+            },
+
+            {
+                nome: "Defesa Índia do Rei",
+                categoria: "fechadas",
+                lances: "1. d4 Cf6 2. c4 g6 3. Cc3 Bg7 4. e4 d6",
+                descricao: "Permite um centro amplo às brancas e prepara um contra-ataque com as peças e os peões."
+            },
+
+            {
+                nome: "Defesa Nimzo-Índia",
+                categoria: "fechadas",
+                lances: "1. d4 Cf6 2. c4 e6 3. Cc3 Bb4",
+                descricao: "Cria pressão sobre o cavalo branco e disputa o controle das casas centrais."
+            },
+
+            {
+                nome: "Defesa Índia da Dama",
+                categoria: "fechadas",
+                lances: "1. d4 Cf6 2. c4 e6 3. Cf3 b6",
+                descricao: "Prepara o desenvolvimento do bispo em b7 para controlar o centro à distância."
+            },
+
+            {
+                nome: "Defesa Grünfeld",
+                categoria: "fechadas",
+                lances: "1. d4 Cf6 2. c4 g6 3. Cc3 d5",
+                descricao: "Permite a formação de um centro de peões branco para depois atacá-lo com as peças."
+            },
+
+            {
+                nome: "Defesa Holandesa",
+                categoria: "fechadas",
+                lances: "1. d4 f5",
+                descricao: "Controla a casa e4 e cria possibilidades de ataque no flanco do rei."
+            },
+
+            {
+                nome: "Defesa Benoni",
+                categoria: "fechadas",
+                lances: "1. d4 Cf6 2. c4 c5 3. d5 e6",
+                descricao: "Gera uma estrutura assimétrica, com chances de contra-ataque para as pretas."
+            },
+
+            {
+                nome: "Gambito Benko",
+                categoria: "fechadas",
+                lances: "1. d4 Cf6 2. c4 c5 3. d5 b5",
+                descricao: "As pretas oferecem material em troca de atividade e pressão nas colunas do flanco da dama."
+            },
+
+            {
+                nome: "Abertura Catalã",
+                categoria: "fechadas",
+                lances: "1. d4 Cf6 2. c4 e6 3. g3",
+                descricao: "Combina o controle central com o desenvolvimento do bispo pela grande diagonal."
+            },
+
+            {
+                nome: "Sistema Londres",
+                categoria: "fechadas",
+                lances: "1. d4 d5 2. Bf4",
+                descricao: "Apresenta uma estrutura sólida e um desenvolvimento organizado para as peças brancas."
+            },
+
+            {
+                nome: "Sistema Colle",
+                categoria: "fechadas",
+                lances: "1. d4 d5 2. Cf3 Cf6 3. e3",
+                descricao: "Busca uma formação de peões compacta e prepara a expansão no centro."
+            },
+
+            {
+                nome: "Ataque Torre",
+                categoria: "fechadas",
+                lances: "1. d4 Cf6 2. Cf3 e6 3. Bg5",
+                descricao: "Desenvolve o bispo para g5, criando pressão sobre as peças adversárias."
+            },
+
+            {
+                nome: "Ataque Trompowsky",
+                categoria: "fechadas",
+                lances: "1. d4 Cf6 2. Bg5",
+                descricao: "Desenvolve rapidamente o bispo e busca alterar a estrutura das pretas."
+            },
+
+            {
+                nome: "Gambito de Budapeste",
+                categoria: "fechadas",
+                lances: "1. d4 Cf6 2. c4 e5",
+                descricao: "As pretas oferecem um peão para ganhar atividade e acelerar o desenvolvimento."
+            },
+
+            {
+                nome: "Defesa Índia Antiga",
+                categoria: "fechadas",
+                lances: "1. d4 Cf6 2. c4 d6",
+                descricao: "Constrói uma estrutura sólida e prepara o desenvolvimento das peças."
+            },
+
+            {
+                nome: "Defesa Tarrasch",
+                categoria: "fechadas",
+                lances: "1. d4 d5 2. c4 e6 3. Cc3 c5",
+                descricao: "Busca uma disputa ativa pelo centro, aceitando uma estrutura de peões potencialmente isolada."
+            },
+
+            {
+                nome: "Defesa Bogo-Índia",
+                categoria: "fechadas",
+                lances: "1. d4 Cf6 2. c4 e6 3. Cf3 Bb4+",
+                descricao: "Desenvolve o bispo com xeque e procura controlar o centro de maneira flexível."
+            },
+
+
+            // =====================================
+            // ABERTURAS DE FLANCO
+            // =====================================
+
+            {
+                nome: "Abertura Inglesa",
+                categoria: "flanco",
+                lances: "1. c4",
+                descricao: "Controla a casa d5 e permite uma construção flexível do centro."
+            },
+
+            {
+                nome: "Abertura Réti",
+                categoria: "flanco",
+                lances: "1. Cf3 d5 2. c4",
+                descricao: "Controla o centro com as peças e evita ocupar imediatamente as casas centrais com peões."
+            },
+
+            {
+                nome: "Abertura Bird",
+                categoria: "flanco",
+                lances: "1. f4",
+                descricao: "Controla a casa e5 e permite construir uma posição agressiva desde os primeiros movimentos."
+            },
+
+            {
+                nome: "Ataque Nimzo-Larsen",
+                categoria: "flanco",
+                lances: "1. b3",
+                descricao: "Prepara o desenvolvimento do bispo em b2 para pressionar o centro pela grande diagonal."
+            },
+
+            {
+                nome: "Ataque Índio do Rei",
+                categoria: "flanco",
+                lances: "1. Cf3 d5 2. g3 Cf6 3. Bg2",
+                descricao: "Utiliza uma formação flexível com fianqueto do bispo para preparar o desenvolvimento e o ataque."
+            },
+
+            {
+                nome: "Abertura Sokolsky",
+                categoria: "flanco",
+                lances: "1. b4",
+                descricao: "Avança o peão da coluna b para ganhar espaço e desenvolver o bispo pela diagonal."
+            },
+
+            {
+                nome: "Abertura Grob",
+                categoria: "flanco",
+                lances: "1. g4",
+                descricao: "Uma abertura agressiva que busca iniciativa imediata, mas exige cuidado com a segurança do rei."
+            }
+
+        ];
+
+
+        // ELEMENTOS DA PÁGINA
+
+        const catalogo = document.getElementById("catalogo");
+        const busca = document.getElementById("busca");
+        const resultado = document.getElementById("resultado");
+
+        const botoesFiltro = document.querySelectorAll(".filtro");
+
+        let filtroAtual = "todas";
+
+
+        // NORMALIZA TEXTO PARA IGNORAR ACENTOS
+
+        function normalizar(texto) {
+
+            return texto
+                .normalize("NFD")
+                .replace(/[\u0300-\u036f]/g, "")
+                .toLowerCase();
+
+        }
+
+
+        // ATUALIZA O CATÁLOGO
+
+        function atualizarCatalogo() {
+
+            const termo = normalizar(busca.value.trim());
+
+            const filtradas = aberturas.filter(abertura => {
+
+                const correspondeCategoria =
+                    filtroAtual === "todas" ||
+                    abertura.categoria === filtroAtual;
+
+                const textoAbertura = normalizar(
+                    abertura.nome + " " +
+                    abertura.lances + " " +
+                    abertura.descricao
+                );
+
+                const correspondeBusca =
+                    textoAbertura.includes(termo);
+
+                return correspondeCategoria && correspondeBusca;
+
+            });
+
+
+            // CRIA OS GRUPOS DE ABERTURAS
+
+            catalogo.innerHTML = categorias.map(categoria => {
+
+                const itens = filtradas.filter(
+                    abertura => abertura.categoria === categoria.id
+                );
+
+                if (itens.length === 0) {
+                    return "";
+                }
+
+
+                // CRIA OS CARTÕES
+
+                const cartoes = itens.map(abertura => `
+
+                    <article class="card-abertura">
+
+                        <div class="card-topo">
+
+                            <span class="simbolo-card">♟</span>
+
+                            <span class="tipo-card">
+                                ${categoria.etiqueta}
+                            </span>
+
+                        </div>
+
+                        <h3>${abertura.nome}</h3>
+
+                        <div class="lances">
+
+                            <span>LANCES INICIAIS</span>
+
+                            <strong>
+                                ${abertura.lances}
+                            </strong>
+
+                        </div>
+
+                        <p>
+                            ${abertura.descricao}
+                        </p>
+
+                    </article>
+
+                `).join("");
+
+
+                return `
+
+                    <section class="grupo-aberturas">
+
+                        <div class="grupo-titulo">
+
+                            <div>
+
+                                <span class="subtitulo">
+                                    CLASSIFICAÇÃO
+                                </span>
+
+                                <h2>
+                                    ${categoria.titulo}
+                                </h2>
+
+                                <p>
+                                    ${categoria.descricao}
+                                </p>
+
+                            </div>
+
+                            <span class="contador">
+
+                                ${itens.length}
+
+                                ${itens.length === 1
+                                    ? "abertura"
+                                    : "aberturas"}
+
+                            </span>
+
+                        </div>
+
+                        <div class="grade-aberturas">
+                            ${cartoes}
+                        </div>
+
+                    </section>
+
+                `;
+
+            }).join("");
+
+
+            // ATUALIZA A QUANTIDADE DE RESULTADOS
+
+            resultado.textContent =
+                filtradas.length +
+                (filtradas.length === 1
+                    ? " abertura encontrada"
+                    : " aberturas encontradas");
+
+
+            // MENSAGEM QUANDO NÃO EXISTIR RESULTADO
+
+            if (filtradas.length === 0) {
+
+                catalogo.innerHTML = `
+
+                    <div class="sem-resultados">
+
+                        <span>♟</span>
+
+                        <h3>Nenhuma abertura encontrada</h3>
+
+                        <p>
+                            Tente pesquisar por outro nome ou movimento.
+                        </p>
+
+                    </div>
+
+                `;
+
+            }
+
+        }
+
+
+        // PESQUISA ENQUANTO O USUÁRIO DIGITA
+
+        busca.addEventListener("input", atualizarCatalogo);
+
+
+        // FILTROS DAS CATEGORIAS
+
+        botoesFiltro.forEach(botao => {
+
+            botao.addEventListener("click", () => {
+
+                botoesFiltro.forEach(b => {
+                    b.classList.remove("ativo");
+                });
+
+                botao.classList.add("ativo");
+
+                filtroAtual = botao.dataset.filtro;
+
+                atualizarCatalogo();
+
+            });
+
+        });
+
+
+        // CARREGA TODAS AS ABERTURAS AO ABRIR A PÁGINA
+
+        atualizarCatalogo();
+
+    </script>
+
+</body>
+
+</html>
