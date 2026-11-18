@@ -135,7 +135,22 @@
                 mensagem.textContent = "Login realizado com sucesso!";
                 mensagem.classList.add("sucesso");
 
-                window.location.href = "projeto.html";
+                // IDENTIFICAR USUÁRIO
+                const usuario = data.user;
+
+                // VERIFICAR SE É ADMINISTRADOR
+                const isAdmin = usuario.app_metadata?.role === "admin";
+
+                // REDIRECIONAMENTO
+                if (isAdmin) {
+
+                    window.location.replace("admin.html");
+
+                } else {
+
+                    window.location.replace("projeto.html");
+
+                }
 
             } catch (error) {
 

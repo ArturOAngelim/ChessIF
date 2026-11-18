@@ -325,3 +325,20 @@ footer {
     }
 
 }
+
+.abrir-modulo {
+    display: inline-block;
+    margin-top: 20px;
+
+    color: #d5a84c;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 13px;
+
+    transition: .3s;
+}
+
+.abrir-modulo:hover {
+    color: #f0c96d;
+    transform: translateX(4px);
+}

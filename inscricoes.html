@@ -1,0 +1,379 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ChessIF | Inscrições</title>
+
+    <link rel="stylesheet" href="inscricoes.css">
+
+    <style>
+        body {
+            visibility: hidden;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="topo">
+        <div>
+            <h1>ChessIF</h1>
+            <span>PAINEL ADMINISTRATIVO</span>
+        </div>
+
+        <nav>
+            <a href="admin.html">Painel</a>
+            <button id="sair">Sair</button>
+        </nav>
+    </header>
+
+    <main class="container">
+
+        <section class="cabecalho">
+            <p class="categoria">GERENCIAMENTO</p>
+            <h2>Inscrições</h2>
+            <p>Gerencie as solicitações de participação no ChessIF.</p>
+        </section>
+
+        <section class="resumo">
+
+            <div class="resumo-card">
+                <span>Total de inscrições</span>
+                <strong id="total">0</strong>
+            </div>
+
+            <div class="resumo-card">
+                <span>Pendentes</span>
+                <strong id="pendentes">0</strong>
+            </div>
+
+            <div class="resumo-card">
+                <span>Aprovadas</span>
+                <strong id="aprovadas">0</strong>
+            </div>
+
+            <div class="resumo-card">
+                <span>Recusadas</span>
+                <strong id="recusadas">0</strong>
+            </div>
+
+        </section>
+
+        <section class="listagem">
+
+            <div class="listagem-topo">
+
+                <h3>Solicitações recebidas</h3>
+
+                <button id="atualizar" type="button">
+                    Atualizar
+                </button>
+
+            </div>
+
+            <div class="filtros">
+
+                <select id="filtro-status">
+                    <option value="todos">Todos os status</option>
+                    <option value="pendente">Pendentes</option>
+                    <option value="em_analise">Em análise</option>
+                    <option value="aprovada">Aprovadas</option>
+                    <option value="recusada">Recusadas</option>
+                </select>
+
+            </div>
+
+            <p id="mensagem"></p>
+
+            <div class="tabela-container">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>Participante</th>
+                            <th>Turma / Curso</th>
+                            <th>Nível</th>
+                            <th>Mensagem</th>
+                            <th>Status</th>
+                            <th>Data</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="lista-inscricoes">
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <script type="module">
+
+        import { supabase } from "./supabase.js";
+
+        let usuarioAdmin = null;
+        let inscricoes = [];
+
+        const lista = document.getElementById("lista-inscricoes");
+        const mensagem = document.getElementById("mensagem");
+
+        // VERIFICAR ADMINISTRADOR
+        async function verificarAdmin() {
+
+            const { data, error } = await supabase.auth.getSession();
+
+            if (error || !data.session) {
+                window.location.replace("login.html");
+                return false;
+            }
+
+            const usuario = data.session.user;
+
+            if (usuario.app_metadata?.role !== "admin") {
+                window.location.replace("projeto.html");
+                return false;
+            }
+
+            usuarioAdmin = usuario;
+
+            document.body.style.visibility = "visible";
+
+            return true;
+        }
+
+        // BUSCAR INSCRIÇÕES
+        async function buscarInscricoes() {
+
+            mensagem.textContent = "Carregando inscrições...";
+            lista.innerHTML = "";
+
+            const { data, error } = await supabase
+                .from("project_applications")
+                .select(`
+                    id,
+                    user_id,
+                    turma_curso,
+                    nivel_xadrez,
+                    mensagem,
+                    status,
+                    created_at,
+                    reviewed_by,
+                    reviewed_at,
+                    profiles (
+                        full_name,
+                        username
+                    )
+                `)
+                .order("created_at", { ascending: false });
+
+            if (error) {
+
+                console.error(error);
+
+                mensagem.textContent =
+                    "Não foi possível carregar as inscrições.";
+
+                return;
+            }
+
+            inscricoes = data || [];
+
+            atualizarResumo();
+            renderizarInscricoes();
+
+            mensagem.textContent =
+                inscricoes.length === 0
+                    ? "Nenhuma inscrição encontrada."
+                    : `${inscricoes.length} inscrição(ões) encontrada(s).`;
+        }
+
+        // ATUALIZAR CONTADORES
+        function atualizarResumo() {
+
+            document.getElementById("total").textContent =
+                inscricoes.length;
+
+            document.getElementById("pendentes").textContent =
+                inscricoes.filter(i => i.status === "pendente").length;
+
+            document.getElementById("aprovadas").textContent =
+                inscricoes.filter(i => i.status === "aprovada").length;
+
+            document.getElementById("recusadas").textContent =
+                inscricoes.filter(i => i.status === "recusada").length;
+        }
+
+        function escaparHTML(valor) {
+
+        return String(valor ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+        }
+
+        // RENDERIZAR TABELA
+        function renderizarInscricoes() {
+
+            lista.innerHTML = "";
+
+            const filtro = document.getElementById("filtro-status").value;
+
+            const filtradas = filtro === "todos"
+                ? inscricoes
+                : inscricoes.filter(i => i.status === filtro);
+
+            if (filtradas.length === 0) {
+                lista.innerHTML = `
+                    <tr>
+                        <td colspan="7">
+                            Nenhuma inscrição para exibir.
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            filtradas.forEach(inscricao => {
+
+                const perfil = inscricao.profiles;
+
+                const nome = perfil?.full_name || perfil?.username || "Usuário";
+
+                const data = inscricao.created_at
+                    ? new Date(inscricao.created_at).toLocaleDateString("pt-BR")
+                    : "—";
+
+                const status = inscricao.status || "pendente";
+
+                const tr = document.createElement("tr");
+
+                tr.innerHTML = `
+                    <td class="nome">${escaparHTML(nome)}</td>
+                    <td>${escaparHTML(inscricao.turma_curso || "—")}</td>
+                    <td>${escaparHTML(inscricao.nivel_xadrez || "—")}</td>
+                    <td>
+                        <span class="status ${escaparHTML(status)}">
+                            ${escaparHTML(status.replace("_", " "))}
+                        </span>
+                    </td>
+                    <td>${data}</td>
+                    <td>
+                        <div class="acoes">
+                            <button data-status="em_analise"
+                                class="analise"
+                                ${status === "aprovada" || status === "recusada" ? "disabled" : ""}>
+                                Analisar
+                            </button>
+
+                            <button data-status="aprovada"
+                                class="aprovar"
+                                ${status === "aprovada" ? "disabled" : ""}>
+                                Aprovar
+                            </button>
+
+                            <button data-status="recusada"
+                                class="recusar"
+                                ${status === "recusada" ? "disabled" : ""}>
+                                Recusar
+                            </button>
+                        </div>
+                    </td>
+                `;
+
+                // Inserir mensagem com segurança
+                tr.querySelector(".mensagem-celula").textContent =
+                    inscricao.mensagem || "—";
+
+                // AÇÕES DOS BOTÕES
+                tr.querySelectorAll("[data-status]").forEach(botao => {
+
+                    botao.addEventListener("click", async () => {
+
+                        const novoStatus = botao.dataset.status;
+
+                        await alterarStatus(
+                            inscricao.id,
+                            novoStatus
+                        );
+
+                    });
+
+                });
+
+                lista.appendChild(tr);
+
+            });
+
+        }
+
+        // ALTERAR STATUS
+        async function alterarStatus(id, novoStatus) {
+
+            const confirmacao = confirm(
+                `Deseja alterar o status para "${novoStatus.replace("_", " ")}"?`
+            );
+
+            if (!confirmacao) return;
+
+            mensagem.textContent = "Atualizando inscrição...";
+
+            const { error } = await supabase
+                .from("project_applications")
+                .update({
+                    status: novoStatus,
+                    reviewed_by: usuarioAdmin.id,
+                    reviewed_at: new Date().toISOString()
+                })
+                .eq("id", id);
+
+            if (error) {
+
+                console.error(error);
+
+                alert("Não foi possível atualizar a inscrição.");
+
+                return;
+            }
+
+            await buscarInscricoes();
+
+        }
+
+        // FILTRO
+        document.getElementById("filtro-status")
+            .addEventListener("change", renderizarInscricoes);
+
+        // ATUALIZAR
+        document.getElementById("atualizar")
+            .addEventListener("click", buscarInscricoes);
+
+        // SAIR
+        document.getElementById("sair")
+            .addEventListener("click", async () => {
+
+                await supabase.auth.signOut();
+
+                window.location.replace("login.html");
+
+            });
+
+        // INICIALIZAÇÃO
+        if (await verificarAdmin()) {
+            await buscarInscricoes();
+        }
+
+    </script>
+
+</body>
+</html>
